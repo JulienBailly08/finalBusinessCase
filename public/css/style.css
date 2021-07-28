@@ -1,0 +1,96 @@
+body{
+    font-family: 'Mulish', sans-serif;
+}
+.taille-90{
+  height: 70px;
+}
+.bannière{
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.tailleSticky{
+  height: 940px;
+}
+.carousel-inner{
+    width:100%;
+    max-height: 600px !important;
+  }
+#presentation{
+    background-image: linear-gradient(to bottom, rgba(87, 85, 85, 0.75), rgba(17, 17, 17, 0.55)), url(../img/arenes1.jpg);
+    background-position: 50% 10%;
+    background-size: 100%, cover;
+    height: 450px;
+  }
+
+#max-height{
+  height: 250 px;
+}
+
+#childrens>a{
+  text-decoration: none;
+}
+
+.zoom {
+  opacity: 0.95;
+  transition: opacity 1s, transform 2s;
+}
+
+.zoom:hover{
+  opacity: 1;
+  transform: scale(1.05); 
+}
+
+.tour{
+  transition: transform 2s;
+}
+
+.tour:hover{
+  transform: rotate(5deg);
+  transform-origin: 0 0; 
+}
+ 
+footer a{
+  text-decoration: none;
+}
+
+@media all and (min-width: 992px){
+  .navbar .nav-item .dropdown-menu{ display: none; }
+	/*.navbar .nav-item:hover .nav-link{   }*/
+	.navbar .nav-item:hover .dropdown-menu{ display: block; }
+	.navbar .nav-item .dropdown-menu{ margin-top:0; }
+
+}
+
+/* Break point md*/
+@media screen and (max-width: 768px) {
+  body{
+    font-size: 0.75rem;
+  }
+  header a{
+    font-size: 0.75rem;
+  }
+  .tailleSticky{
+    height: auto;
+  }
+  .zoom {
+    opacity: 1;
+  }
+  .zoom:hover{
+    transform: none;
+  }
+  .tour:hover{
+    transform: none;
+  }
+}
+/*break point sm*/
+@media screen and (max-width: 576px) {
+  body{
+    font-size: 0.65rem;
+  }
+  header a{
+    font-size: 0.65rem;
+  }
+  
+}

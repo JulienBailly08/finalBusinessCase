@@ -1,0 +1,42 @@
+<div class="modal fade" id="login" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="loginLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-secondary" id="loginLabel">Informations d'authentification</h5>
+                  </div>
+                  <div class="modal-body">
+                    <div class="container-fluid">
+                      <div class="row">
+                          <div class="col">
+                            <div class="mb-1 text-start">
+                              <label for="log" class="form-label text-primary">Identifiant :</label>
+                              <p><?php 
+                              //if cessions[login]  existe l'afficher
+                              //else :
+                                echo ('Actuellement anonyme');
+                              ?></p>
+                            </div>
+                          </div>                    
+                        <div class="d-flex justify-content-between">
+                          <a href="{{path('app_register')}}" class="text-center">Créer mon compte</a>
+                          <?php 
+                          //si cession[login] existe => afficher lien deconnexion
+
+                          //else afficher le lien mot de passe oublié
+                          
+                          ?>
+                          <a href="<?php echo(URL_SITE);?>form/2" class="text-center text-light" >Mot de passe oublié ?</a>                         
+                        </div> 
+                      </div>
+                    </div>                
+                  </div>
+                  <div class="modal-footer">
+                    <?php 
+                    // if $_CESSION[login] exist ne pas afficher bouton de connexion
+                    ?>
+                    <a href="<?php echo(URL_SITE);?>form/1"><button type="button" class="btn btn-secondary">Se connecter</button></a>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Quitter</button>
+                  </div>
+                </div>
+              </div>
+            </div>

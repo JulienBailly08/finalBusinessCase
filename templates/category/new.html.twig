@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}- Categories{% endblock %}
+
+{% block body %}
+    <h1>Ajout d'un nouvel univers</h1>
+
+    {{ include('category/_form.html.twig') }}
+
+    <a href="{{ path('category_index') }}">Retour à la gestion des Categories</a>
+{% endblock %}

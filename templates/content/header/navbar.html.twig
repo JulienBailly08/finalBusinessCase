@@ -1,0 +1,50 @@
+{% include 'content/header/modalNav.html.twig'%}
+      <div class="container-flex">
+        <nav class="navbar navbar-expand-md navbar-light d-flex flex-column">
+          <div class="container-fluid justify-content-between">
+            <a class="navbar-brand" href={{ path('home')}}><img src={{ asset('img/logo.png')}} width="120"/></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse flex-grow-1 flex-md-grow-0" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-md-0">
+              
+              
+              <li class="nav-item dropdown px-2">
+                  <a class="nav-link dropdown-toggle text-primary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Univers
+                  </a>
+                  <ul class="dropdown-menu border-0" aria-labelledby="navbarDropdown">
+                    <li>
+                      <a class="dropdown-item text-secondary" href="univers.html">
+                          Chien
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item text-primary" href="#">
+                          Chat
+                      </a>
+                    </li>
+                    <li><hr class="dropdown-divider"/></li>
+                    <li>
+                      <a class="dropdown-item text-secondary" href="#">
+                        Cervidés
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+
+            
+              </ul>      
+           </div>           
+            <div class=" justify-content-center d-none d-md-inline-flex">
+              <a class=" px-2 px-lg-3 order-2" href="#"><img src="{{ asset('img/panier.png')}}"/></a>
+              <a class=" px-3 px-lg-5 order-1" href="#"><img src="{{ asset('img/login.png')}}" data-bs-toggle="modal" data-bs-target="#login"/></a>
+            </div>           
+          </div>
+          <div class=" col-12 justify-content-around d-md-none d-inline-flex ">
+            <a class=" px-5 order-2" href="#"><img src="{{ asset('img/panier.png')}}"/></a>
+            <a class=" px-5 order-1" href="#"><img src="{{ asset('img/login.png')}}" data-bs-toggle="modal" data-bs-target="#login"/></a>
+          </div>
+        </nav>
+        </div>

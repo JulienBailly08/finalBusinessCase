@@ -1,0 +1,22 @@
+body{
+    font-family: 'Mulish', sans-serif;
+    background-image: linear-gradient(to bottom, rgba(34, 33, 33, 0.100), rgb(8, 8, 8)), url(../img/orbit.jpg);
+    background-position: center;
+    background-size: cover;
+}
+
+
+.hauteur{
+    height: 940px;
+}
+
+@media screen and (max-width: 768px) {
+  body{
+    font-size: 0.75rem;
+  }
+}
+@media screen and (max-width: 576px) {
+  body{
+    font-size: 0.65rem;
+  }
+}
