@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ImgBanners{% endblock %}
+
+{% block body %}
+    <h1>Create new ImgBanners</h1>
+
+    {{ include('img_banners/_form.html.twig') }}
+
+    <a href="{{ path('img_banners_index') }}">back to list</a>
+{% endblock %}

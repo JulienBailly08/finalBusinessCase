@@ -41,6 +41,11 @@ class Command
      */
     private $client;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $ClickAndCollect;
+
     public function __construct()
     {
         $this->quantityOnCommands = new ArrayCollection();
@@ -113,6 +118,18 @@ class Command
     public function setClient(?User $client): self
     {
         $this->client = $client;
+
+        return $this;
+    }
+
+    public function getClickAndCollect(): ?bool
+    {
+        return $this->ClickAndCollect;
+    }
+
+    public function setClickAndCollect(bool $ClickAndCollect): self
+    {
+        $this->ClickAndCollect = $ClickAndCollect;
 
         return $this;
     }

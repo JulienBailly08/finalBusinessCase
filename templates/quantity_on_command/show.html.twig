@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}QuantityOnCommand{% endblock %}
+
+{% block body %}
+    <h1>QuantityOnCommand</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ quantity_on_command.id }}</td>
+            </tr>
+            <tr>
+                <th>Quantity</th>
+                <td>{{ quantity_on_command.Quantity }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('quantity_on_command_index') }}">back to list</a>
+
+    <a href="{{ path('quantity_on_command_edit', {'id': quantity_on_command.id}) }}">edit</a>
+
+    {{ include('quantity_on_command/_delete_form.html.twig') }}
+{% endblock %}

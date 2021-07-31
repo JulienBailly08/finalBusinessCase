@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ImgBanners index{% endblock %}
+
+{% block body %}
+    <h1>ImgBanners index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Url</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for img_banner in img_banners %}
+            <tr>
+                <td>{{ img_banner.id }}</td>
+                <td>{{ img_banner.url }}</td>
+                <td>{{ img_banner.name }}</td>
+                <td>
+                    <a href="{{ path('img_banners_show', {'id': img_banner.id}) }}">show</a>
+                    <a href="{{ path('img_banners_edit', {'id': img_banner.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('img_banners_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ImgBanners{% endblock %}
+
+{% block body %}
+    <h1>ImgBanners</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ img_banner.id }}</td>
+            </tr>
+            <tr>
+                <th>Url</th>
+                <td>{{ img_banner.url }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ img_banner.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('img_banners_index') }}">back to list</a>
+
+    <a href="{{ path('img_banners_edit', {'id': img_banner.id}) }}">edit</a>
+
+    {{ include('img_banners/_delete_form.html.twig') }}
+{% endblock %}
