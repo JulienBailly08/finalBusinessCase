@@ -1,12 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
 {% block title %} - Categories{% endblock %}
 
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-        <div class="col-12">
+        <div class="col-6">
         <a class="btn btn-secondary m-5"href="{{ path('category_new') }}">Créer un nouvel univers</a>
+        </div>
+        <div class="col-6">
+        <a class="btn btn-secondary m-5"href="{{ path('img_banners_index') }}">Gérer les bannières des univers</a>
         </div>
             {% for category in categories %}                
                 {% if category.parent is null %}

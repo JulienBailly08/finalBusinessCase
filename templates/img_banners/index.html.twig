@@ -1,37 +1,27 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
-{% block title %}ImgBanners index{% endblock %}
+{% block title %}
+	- Bannières
+{% endblock %}
 
 {% block body %}
-    <h1>ImgBanners index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Url</th>
-                <th>Name</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for img_banner in img_banners %}
-            <tr>
-                <td>{{ img_banner.id }}</td>
-                <td>{{ img_banner.url }}</td>
-                <td>{{ img_banner.name }}</td>
-                <td>
-                    <a href="{{ path('img_banners_show', {'id': img_banner.id}) }}">show</a>
-                    <a href="{{ path('img_banners_edit', {'id': img_banner.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="4">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<div class="container-fluid">
+		<div class="row">
+			{% for img_banner in img_banners %}
+				<div class="ps-5 row d-flex bannière  align-items-center mt-4 mb-2" style="background-image: url({{ asset('upload/'~ img_banner.url)}});">
+					<h2 class="text-center text-success m-4">
+						{{ img_banner.name }}</h2>
+					<a href="{{ path('img_banners_edit', {'id': img_banner.id}) }}">
+						<button class="btn btn-primary m-3">Modifier</button>
+					</a>
+				</div>
+			{% endfor %}
+			<a href="{{ path('img_banners_new') }}">
+				<button class="btn btn-primary m-3">Créer une nouvelle bannière</button>
+			</a>
+		</div>
+	</div>
 
-    <a href="{{ path('img_banners_new') }}">Create new</a>
+
 {% endblock %}

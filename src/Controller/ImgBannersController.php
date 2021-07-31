@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/img/banners')]
 class ImgBannersController extends AbstractController
@@ -22,13 +24,28 @@ class ImgBannersController extends AbstractController
     }
 
     #[Route('/new', name: 'img_banners_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, SluggerInterface $slugger): Response
     {
         $imgBanner = new ImgBanners();
         $form = $this->createForm(ImgBannersType::class, $imgBanner);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image = $form->get('url')->getData();
+
+            if ($image) {
+                $originalFileName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName . '-' . uniqid() . '.' . $image->guessExtension();
+
+                try {
+                    $image->move($this->getParameter('upload_directory'), $newFileName);
+                } catch (FileException $e) {
+                    var_dump($e);
+                }
+                $imgBanner->setUrl($newFileName);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($imgBanner);
             $entityManager->flush();
@@ -51,12 +68,29 @@ class ImgBannersController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'img_banners_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, ImgBanners $imgBanner): Response
+    public function edit(Request $request, ImgBanners $imgBanner, SluggerInterface $slugger): Response
     {
         $form = $this->createForm(ImgBannersType::class, $imgBanner);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $image = $form->get('url')->getData();
+
+            if ($image) {
+                $originalFileName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName . '-' . uniqid() . '.' . $image->guessExtension();
+
+                try {
+                    $image->move($this->getParameter('upload_directory'), $newFileName);
+                } catch (FileException $e) {
+                    var_dump($e);
+                }
+                $imgBanner->setUrl($newFileName);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('img_banners_index', [], Response::HTTP_SEE_OTHER);
@@ -71,7 +105,7 @@ class ImgBannersController extends AbstractController
     #[Route('/{id}', name: 'img_banners_delete', methods: ['POST'])]
     public function delete(Request $request, ImgBanners $imgBanner): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$imgBanner->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $imgBanner->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($imgBanner);
             $entityManager->flush();

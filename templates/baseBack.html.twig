@@ -1,0 +1,20 @@
+<html>
+    <head>
+        
+        {% include 'content/headBack.html.twig' %}  
+        <title>La Nîmes'Alerie {% block title %}{% endblock %}</title> 
+
+    </head>
+
+    <body>
+    <header>{% include 'content/header/navbarBack.html.twig' %}</header>
+   
+
+
+    {% block body %}{% endblock %}
+
+        <footer>{% include 'content/footer/footerBack.html.twig' %}</footer>
+
+    </body>   
+        {% include 'content/script.html.twig' %}
+</html>
