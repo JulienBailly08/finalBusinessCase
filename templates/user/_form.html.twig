@@ -8,9 +8,8 @@
             {{ form_row(form.firstname,{label : 'Prénom : '}) }}
             {{ form_row(form.lastname,{label : 'Nom : '}) }}
             {{ form_row(form.dateOfBirth,{label : 'Date de naissance : '}) }}
-            <hr>
             {{ form_row(form.email,{label : 'Email :'}) }}
-			{{ form_widget(form) }}
+			{{ form_row(form.isVerified,{label : 'Email vérifié'}) }}
 			<button class="btn btn-primary">{{ button_label|default('valider') }}</button>
 			{{ form_end(form) }}
 		</div>

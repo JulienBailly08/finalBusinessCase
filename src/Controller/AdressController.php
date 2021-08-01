@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Adress;
-use App\Form\Adress1Type;
+use App\Entity\User;
+use App\Form\AdressType;
 use App\Repository\AdressRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,12 +23,12 @@ class AdressController extends AbstractController
     }
 
     #[Route('/new', name: 'adress_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, User $user): Response
     {
         $adress = new Adress();
-        $form = $this->createForm(Adress1Type::class, $adress);
+        $form = $this->createForm(AdressType::class, $adress);
         $form->handleRequest($request);
-
+       
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($adress);
@@ -53,7 +54,7 @@ class AdressController extends AbstractController
     #[Route('/{id}/edit', name: 'adress_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Adress $adress): Response
     {
-        $form = $this->createForm(Adress1Type::class, $adress);
+        $form = $this->createForm(AdressType::class, $adress);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -77,6 +78,6 @@ class AdressController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('adress_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -1,11 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'baseBack.html.twig' %}
 
-{% block title %}New Adress{% endblock %}
+{% block title %} - Adresse{% endblock %}
 
 {% block body %}
-    <h1>Create new Adress</h1>
+ <h1 class="text-white text-center">Création de l'adresse</h1>
+    <div class="container-fluid">
+		<a href="{{ path('user_show',{'id':user.id}) }}">
+			<button class="btn btn-primary">Retour au détail du client</button>
+		</a>
+	</div>
 
-    {{ include('adress/_form.html.twig') }}
+      {{ include('adress/_form.html.twig') }}
 
-    <a href="{{ path('adress_index') }}">back to list</a>
 {% endblock %}

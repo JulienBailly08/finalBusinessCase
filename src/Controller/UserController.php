@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Adress;
 use App\Form\UserType;
+use App\Form\AdressType;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -71,6 +72,56 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
+
+    #[Route('/{id}/newAdress', name: 'user_adress_new', methods: ['GET', 'POST'])]
+    public function newAdress(Request $request, User $user): Response
+    {
+        $adress = new Adress;
+        $form = $this->createForm(AdressType::class, $adress);       
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $adress->setIdUser($user);
+            $entityManager->persist($adress);
+            $entityManager->flush();
+
+
+            return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('adress/new.html.twig', [
+            'user' => $user,
+            'adress' =>$adress,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/adress', name: 'user_adress_edit', methods: ['GET', 'POST'])]
+    public function editAdress(Request $request, User $user): Response
+    {
+        $adresses = new Adress;
+        $adresses = $user->getAdresses();
+        
+        foreach ($adresses as $key => $adress) {
+            $form = $this->createForm(AdressType::class, $adress);
+        }
+        
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('adress/edit.html.twig', [
+            'user' => $user,
+            'adress' =>$adress,
+            'form' => $form,
+        ]);
+    }
+
 
     #[Route('/{id}', name: 'user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user): Response

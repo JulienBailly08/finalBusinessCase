@@ -11,25 +11,23 @@
 			<a href="{{ path('user_index') }}">
 				<button class="btn btn-primary">Retour à la liste des Clients</button>
 			</a>
-
-			{% dump adress %}
-
-			{% for item in adress %}
-				{% dump item %}
-			{% endfor %}
-
 			<table class="table">
 				<tbody>
 					<tr>
-						<th class="text-secondary">Id</th>
-						<td class="text-white">{{ user.id }}</td>
+						<th class="text-secondary">Civilité</th>
+						<td class="text-white">{{ user.gender ? 'Madame' : 'Monsieur' }}</td>
+					</tr>
+
+					<tr>
+						<th class="text-secondary">Prénom</th>
+						<td class="text-white">{{ user.firstname }}</td>
 					</tr>
 					<tr>
-						<th class="text-secondary">Email</th>
-						<td class="text-white">{{ user.email }}</td>
+						<th class="text-secondary">Nom</th>
+						<td class="text-white">{{ user.lastname }}</td>
 					</tr>
 					<tr>
-						<th class="text-secondary">Roles</th>
+						<th class="text-secondary">Droits</th>
 						<td class="text-white">{{ user.roles ? user.roles|json_encode : '' }}
 							<a class="ms-5">
 								<button class="btn btn-primary">Modifier droits</button>
@@ -37,74 +35,63 @@
 						</td>
 					</tr>
 					<tr>
-						<th class="text-secondary">Firstname</th>
-						<td class="text-white">{{ user.firstname }}</td>
+						<th class="text-secondary">Date de naissance</th>
+						<td class="text-white">{{ user.dateOfBirth ? user.dateOfBirth|date('d-m-Y') : '' }}</td>
 					</tr>
 					<tr>
-						<th class="text-secondary">Lastname</th>
-						<td class="text-white">{{ user.lastname }}</td>
+						<th class="text-secondary">E-mail</th>
+						<td class="text-white">{{ user.email }}</td>
 					</tr>
 					<tr>
-						<th class="text-secondary">Gender</th>
-						<td class="text-white">{{ user.gender ? 'Yes' : 'No' }}</td>
-					</tr>
-					<tr>
-						<th class="text-secondary">DateOfBirth</th>
-						<td class="text-white">{{ user.dateOfBirth ? user.dateOfBirth|date('Y-m-d') : '' }}</td>
-					</tr>
-					<tr>
-						<th class="text-secondary">IsVerified</th>
-						<td class="text-white">{{ user.isVerified ? 'Yes' : 'No' }}</td>
+						<th class="text-secondary">E-mail vérifié</th>
+						<td class="text-white">{{ user.isVerified ? 'Oui' : 'Non' }}</td>
 					</tr>
 				</tbody>
 			</table>
-
-			<h2 class="text-white">Adresse du Client</h2>
+			<div class="d-flex">
+				<h2 class="text-white">Adresse du Client</h2>
+				
+			</div>
 
 			{% for item in adress %}
-
-				{% if item %}
-
+                <a class="ms-5" href={{path('user_adress_edit',{'id':user.id})}}>
+					<button class="btn btn-primary">Modification de l'adresse</button>
+				</a>
 					<table class="table">
 						<tbody>
 							<tr>
 								<th class="text-secondary">N°</th>
 								<td class="text-white">{{ item.number }}</td>
 							</tr>
-                            <tr>
+							<tr>
 								<th class="text-secondary">Type de voie</th>
 								<td class="text-white">{{ item.type }}</td>
 							</tr>
-                            <tr>
+							<tr>
 								<th class="text-secondary">nom de voie</th>
 								<td class="text-white">{{ item.name }}</td>
 							</tr>
-                            <tr>
+							<tr>
 								<th class="text-secondary">Code postal</th>
 								<td class="text-white">{{ item.postalCode}}</td>
 							</tr>
-                            <tr>
+							<tr>
 								<th class="text-secondary">Ville</th>
 								<td class="text-white">{{ item.city}}</td>
 							</tr>
-                            <tr>
+							<tr>
 								<th class="text-secondary">Pays</th>
 								<td class="text-white">{{ item.country}}</td>
 							</tr>
 
 						</tbody>
 					</table>
-                {% else %}
-                    <p class="text-white">Ce client ne possède pas d'adresse enregistrée</p>
-
-				{% endif %}
-				
+				{% else %}
+					<p class="text-white">Ce client ne possède pas d'adresse enregistrée</p>
+                    <a class="ms-5" href={{path('user_adress_new',{'id':user.id})}}>
+					<button class="btn btn-primary">Ajouter une adresse</button>
+				</a>
 			{% endfor %}
-
-
-			<a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-			{{ include('user/_delete_form.html.twig') }}
-        </div>
+		</div>
 	</div>
 {% endblock %}
