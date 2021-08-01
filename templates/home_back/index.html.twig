@@ -1,0 +1,76 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}
+	- Accueil Back
+{% endblock %}
+
+{% block body %}
+	<div class="container mt-5">
+		<div class="row row-cols-1 row-cols-md-3 g-4">
+
+			<div class="col">
+				<a href="{{path('category_index')}}">
+					<div class="card">
+						<img src="{{asset('img/category.jpg')}}" class="img-fluid size" alt="...">
+						<div class="card-body">
+							<h5 class="card-title text-center">Gestion des Categories</h5>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col">
+				<a href="{{path('img_banners_index')}}">
+					<div class="card">
+						<img src="{{asset('img/banner.jpg')}}" class="img-fluid size" alt="...">
+						<div class="card-body">
+							<h5 class="card-title text-center">Gestion des Bannières</h5>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col">
+				<a href="{{path('product_index')}}">
+					<div class="card">
+						<img src="{{asset('img/produits.jpg')}}" class="img-fluid size" alt="...">
+						<div class="card-body">
+							<h5 class="card-title text-center">Gestion des Produits</h5>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col">
+				<a href="{{path('command_index')}}">
+					<div class="card">
+						<img src="{{asset('img/commandes.jpg')}}" class="img-fluid size" alt="...">
+						<div class="card-body">
+							<h5 class="card-title text-center">Gestion des Commandes</h5>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col">
+				<a href="{{path('user_index')}}">
+					<div class="card">
+						<img src="{{asset('img/user.jpg')}}" class="img-fluid size" alt="...">
+						<div class="card-body">
+							<h5 class="card-title text-center">Gestion des taux de TVA</h5>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col">
+				<a href="{{path('user_index')}}">
+					<div class="card">
+						<img src="{{asset('img/user.jpg')}}" class="img-fluid size" alt="...">
+						<div class="card-body">
+							<h5 class="card-title text-center">Gestion des Clients</h5>
+						</div>
+					</div>
+				</a>
+			</div>
+
+
+		</div>
+	</div>
+{% endblock body %}

@@ -1,13 +1,20 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %} - Categories{% endblock %}
+{% block title %}
+	- Categories
+{% endblock %}
 
 {% block body %}
-    <h1>Modification de catégorie</h1>
+	<h1 class="text-white text-center">Modification de catégorie</h1>
 
-    {{ include('category/_form.html.twig', {'button_label': 'Modifier'}) }}
+	<div class="container-fluid">
+		<a href="{{ path('category_index') }}">
+			<button class="btn btn-primary">Retour à la gestion des Categories</button>
+		</a>
+	</div>
 
-    <a href="{{ path('category_index') }}">Retour à la gestion des Categories</a>
+	{{ include('category/_form.html.twig', {'button_label': 'Modifier'}) }}
 
-    {{ include('category/_delete_form.html.twig') }}
+
+	{{ include('category/_delete_form.html.twig') }}
 {% endblock %}

@@ -1,11 +1,15 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %}- Categories{% endblock %}
+{% block title %}- Categories
+{% endblock %}
 
 {% block body %}
-    <h1>Ajout d'un nouvel univers</h1>
+	<h1 class="text-white text-center">Ajout d'un nouvel univers</h1>
+	<div class="container-fluid">
+		<a href="{{ path('category_index') }}">
+			<button class="btn btn-primary">Retour à la gestion des Categories</button>
+		</a>
+	</div>
+	{{ include('category/_form.html.twig') }}
 
-    {{ include('category/_form.html.twig') }}
-
-    <a href="{{ path('category_index') }}">Retour à la gestion des Categories</a>
 {% endblock %}

@@ -1,49 +1,65 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %} - Categories{% endblock %}
+{% block title %}
+	- Categories
+{% endblock %}
 
 {% block body %}
-    <div class="container-fluid">
-        <div class="row">
-        <div class="col-6">
-        <a class="btn btn-secondary m-5"href="{{ path('category_new') }}">Créer un nouvel univers</a>
-        </div>
-        <div class="col-6">
-        <a class="btn btn-secondary m-5"href="{{ path('img_banners_index') }}">Gérer les bannières des univers</a>
-        </div>
-            {% for category in categories %}                
-                {% if category.parent is null %}
-                <div class="col-6">
-                    <div class=" bg-light rounded">
-                        <div class="">
-                            <p class="text-center m-3">Univers {% if category.isActive %}Actif {% else %} <span class="text-danger">Non actif</span>{% endif %} : {{category.name}}  
-                            <a class="btn btn-secondary m-1"href="{{ path('category_edit', {'id': category.id}) }}">Modifier</a>
-                            <a class="btn btn-secondary m-1"href="{{ path('category_new_son',{'id': category.id}) }}">Ajouter sous cat</a></p>                          
-                            {% for category1 in categories %}
-                                <ul>
-                                    {% if category1.parent is not null and category1.parent.id == category.id %}                             
-                                        <li>{{category1.name}} {{category1.id}} {% if category1.isActive %}Actif {% else %}  <span class="text-danger">Non actif</span>{% endif %}
-                                            <a class="btn btn-secondary m-1"href="{{ path('category_edit', {'id': category1.id}) }}">Modifier</a>
-                                            <a class="btn btn-secondary m-1"href="{{ path('category_new_son',{'id': category1.id}) }}">Ajouter sous cat</a>
-                                                <ul>
-                                                {% for category2 in categories %}                               
-                                                    {% if category2.parent is not null and category2.parent.id == category1.id %}                             
-                                                            <li>{{category2.name}} {% if category2.isActive %}Actif {% else %}  <span class="text-danger">Non actif</span>{% endif %}
-                                                            <a class="btn btn-secondary m-1"href="{{ path('category_edit', {'id': category2.id}) }}">Modifier</a>
-                                                            <a class="btn btn-secondary m-1"href="{{ path('category_new_son',{'id': category2.id}) }}">Ajouter sous cat</a>                                                          
-                                                            </li>                             
-                                                    {% endif %}                                 
-                                                {% endfor %}
-                                                </ul>
-                                        </li>                             
-                                    {% endif %}
-                                </ul>    
-                            {% endfor %}
-                        </div>
-                    </div>  
-                </div>  
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>  
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-6">
+				<a class="btn btn-secondary m-5" href="{{ path('category_new') }}">Créer un nouvel univers</a>
+			</div>
+			<div class="col-6"></div>
+			{% for category in categories %}
+				{% if category.parent is null %}
+					<div class="col-6">
+						<div class=" bg-light rounded">
+							<div class="">
+								<p class="text-center m-3">Univers
+									{% if category.isActive %}Actif
+									{% else %}
+										<span class="text-danger">Non actif</span>
+									{% endif %}
+									:
+									{{category.name}}
+									<a class="btn btn-secondary m-1" href="{{ path('category_edit', {'id': category.id}) }}">Modifier</a>
+									<a class="btn btn-secondary m-1" href="{{ path('category_new_son',{'id': category.id}) }}">Ajouter sous cat</a>
+								</p>
+								{% for category1 in categories %}
+									<ul>
+										{% if category1.parent is not null and category1.parent.id == category.id %}
+											<li>{{category1.name}}
+												{{category1.id}}
+												{% if category1.isActive %}Actif
+												{% else %}
+													<span class="text-danger">Non actif</span>
+												{% endif %}
+												<a class="btn btn-secondary m-1" href="{{ path('category_edit', {'id': category1.id}) }}">Modifier</a>
+												<a class="btn btn-secondary m-1" href="{{ path('category_new_son',{'id': category1.id}) }}">Ajouter sous cat</a>
+												<ul>
+													{% for category2 in categories %}
+														{% if category2.parent is not null and category2.parent.id == category1.id %}
+															<li>{{category2.name}}
+																{% if category2.isActive %}Actif
+																{% else %}
+																	<span class="text-danger">Non actif</span>
+																{% endif %}
+																<a class="btn btn-secondary m-1" href="{{ path('category_edit', {'id': category2.id}) }}">Modifier</a>
+																<a class="btn btn-secondary m-1" href="{{ path('category_new_son',{'id': category2.id}) }}">Ajouter sous cat</a>
+															</li>
+														{% endif %}
+													{% endfor %}
+												</ul>
+											</li>
+										{% endif %}
+									</ul>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

@@ -1,23 +1,27 @@
 {% extends 'baseBack.html.twig' %}
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
-{% block title %}- Categories{% endblock %}
+{% block title %}- Categories
+{% endblock %}
 
 {% block body %}
-    <h1>Ajout d'une nouvelle sous catégorie</h1>
+	<h1 class="text-center text-white">Ajout d'une nouvelle sous catégorie</h1>
+	<div class="container-fluid">
+		<a href="{{ path('category_index') }}">
+			<button class="btn btn-primary">Retour à la gestion des Categories</button>
+		</a>
+	</div>
 
-    
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-8">
-            {{ form_start(form) }}
-                {{ form_row(form.name,{'attr' :{'placeholder' :'Nom de la catégorie'},'label' : 'Nom '}) }}
-                {{ form_row(form.isActive,{'label' : 'Rendre la catégorie active '}) }}
-            
-                <button class="btn btn-primary">{{ button_label|default('Valider') }}</button>
-            {{ form_end(form) }}
-        </div>    
-    </div>
-</div>
+	<div class="container-fluid">
+		<div class="row justify-content-center">
+			<div class="col-8">
+				{{ form_start(form) }}
+				{{ form_row(form.name,{'attr' :{'placeholder' :'Nom de la catégorie'},'label' : 'Nom '}) }}
+				{{ form_row(form.isActive,{'label' : 'Rendre la catégorie active '}) }}
 
-    <a href="{{ path('category_index') }}">Retour à la gestion des Categories</a>
+				<button class="btn btn-primary">{{ button_label|default('Valider') }}</button>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+
 {% endblock %}
