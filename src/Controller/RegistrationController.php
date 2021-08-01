@@ -45,7 +45,7 @@ class RegistrationController extends AbstractController
                 )
             );
 
-//ajouter des champs de validation pour le $adresse
+            //ajouter des champs de validation pour le $adresse
 
             $adresse->setNumber($form->get('adress')->get('number')->getData());
             $adresse->setType($form->get('adress')->get('type')->getData());

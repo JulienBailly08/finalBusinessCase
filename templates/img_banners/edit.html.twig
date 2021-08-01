@@ -5,11 +5,16 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Edit ImgBanners</h1>
 
-    {{ include('img_banners/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('img_banners_index') }}">back to list</a>
-
-    {{ include('img_banners/_delete_form.html.twig') }}
+	<div class="container">
+		<h1 class="text-white">Mise à jour d'une bannière</h1>
+		<div class="col-6">
+			{{ include('img_banners/_form.html.twig',{'button_label': 'Mise à jour'}) }}
+		</div>
+		<a href="{{ path('img_banners_index') }}">
+			<button class="btn btn-warning">Revenir aux bannières</button>
+		</a>
+     {{ include('img_banners/_delete_form.html.twig') }}   
+	</div>
+	
 {% endblock %}
