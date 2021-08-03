@@ -2,6 +2,6 @@
 
 {{ form_start(form) }}
      {{ form_row(form.name, {label: 'Nom de l\'univers :' }) }}
-     {{ form_row(form.url,{'attr' :{'placeholder' :'Sibylle'},'label' : 'Image à uploader : '}) }}
+     {{ form_row(form.url,{'label' : 'Image à uploader : '}) }}
     <button class="btn btn-primary">{{ button_label|default('Valider') }}</button>
 {{ form_end(form) }}

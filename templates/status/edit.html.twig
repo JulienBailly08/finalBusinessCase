@@ -1,13 +1,19 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %}Edit Status{% endblock %}
+{% block title %} - Statut{% endblock %}
 
 {% block body %}
-    <h1>Edit Status</h1>
 
-    {{ include('status/_form.html.twig', {'button_label': 'Update'}) }}
+<div class="container">
+		<h1 class="text-white">Mise à jour du Statut</h1>
+		<div class="col-6">
+			{{ include('status/_form.html.twig',{'button_label': 'Mise à jour'}) }}
+		</div>
+		<a href="{{ path('status_index') }}">
+			<button class="btn btn-warning">Retour</button>
+		</a>
+       {{ include('status/_delete_form.html.twig') }}
+	</div>
 
-    <a href="{{ path('status_index') }}">back to list</a>
-
-    {{ include('status/_delete_form.html.twig') }}
+    
 {% endblock %}

@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/product')]
 class ProductController extends AbstractController
@@ -22,13 +24,54 @@ class ProductController extends AbstractController
     }
 
     #[Route('/new', name: 'product_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, SluggerInterface $slugger): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $image1 = $form->get('picture1')->getData();
+            $image2 = $form->get('picture2')->getData();
+            $image3 = $form->get('picture3')->getData();
+
+            if ($image1) {
+                $originalFileName = pathinfo($image1->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName . '-' . uniqid() . '.' . $image1->guessExtension();
+
+                try {
+                    $image1->move($this->getParameter('upload_directory'), $newFileName);
+                } catch (FileException $e) {
+                    var_dump($e);
+                }
+                $product->setPicture1($newFileName);
+            }
+            if ($image2) {
+                $originalFileName = pathinfo($image2->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName . '-' . uniqid() . '.' . $image2->guessExtension();
+
+                try {
+                    $image2->move($this->getParameter('upload_directory'), $newFileName);
+                } catch (FileException $e) {
+                    var_dump($e);
+                }
+                $product->setPicture2($newFileName);
+            }
+            if ($image3) {
+                $originalFileName = pathinfo($image3->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFileName = $slugger->slug($originalFileName);
+                $newFileName = $safeFileName . '-' . uniqid() . '.' . $image3->guessExtension();
+
+                try {
+                    $image3->move($this->getParameter('upload_directory'), $newFileName);
+                } catch (FileException $e) {
+                    var_dump($e);
+                }
+                $product->setPicture3($newFileName);
+            }
+
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();

@@ -1,35 +1,43 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %}Status index{% endblock %}
+{% block title %}
+	- Statut
+{% endblock %}
 
 {% block body %}
-    <h1>Status index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Information</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for status in statuses %}
-            <tr>
-                <td>{{ status.id }}</td>
-                <td>{{ status.information }}</td>
-                <td>
-                    <a href="{{ path('status_show', {'id': status.id}) }}">show</a>
-                    <a href="{{ path('status_edit', {'id': status.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<div class="container">
+		<div class="row">
+			<h1 class="text-center text-white">Statuts existants</h1>
 
-    <a href="{{ path('status_new') }}">Create new</a>
+			<a href="{{ path('status_new') }}">
+				<button class="btn btn-primary">Ajout d'un nouveau statut</button>
+			</a>
+
+			<table class="table">
+				<thead class="text-secondary">
+					<tr>
+						<th>Désignation</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody class="text-white">
+					{% for status in statuses %}
+						<tr>
+							<td>{{ status.information }}</td>
+							<td>
+								<a href="{{ path('status_edit', {'id': status.id}) }}">
+									<button class="btn btn-primary">Modifier</button>
+								</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="10">Aucune valeur référencée</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 {% endblock %}

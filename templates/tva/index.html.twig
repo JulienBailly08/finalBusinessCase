@@ -1,35 +1,40 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %}TVA index{% endblock %}
+{% block title %}
+	- TVA
+{% endblock %}
 
 {% block body %}
-    <h1>TVA index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Rate</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for t_v_a in t_v_as %}
-            <tr>
-                <td>{{ t_v_a.id }}</td>
-                <td>{{ t_v_a.rate }}</td>
-                <td>
-                    <a href="{{ path('tva_show', {'id': t_v_a.id}) }}">show</a>
-                    <a href="{{ path('tva_edit', {'id': t_v_a.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<div class="container">
+		<div class="row">
+			<h1 class="text-center text-white">Taux de TVA existants</h1>
 
-    <a href="{{ path('tva_new') }}">Create new</a>
+			<a href="{{ path('tva_new') }}"><button class="btn btn-primary">Nouvelle valeur de TVA</button></a>
+				
+			
+			<table class="table">
+				<thead class="text-secondary">
+					<tr>
+						<th>Taux</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody class="text-white">
+					{% for t_v_a in t_v_as %}
+						<tr>
+							<td>{{ t_v_a.rate }}</td>
+							<td>
+						    <a href="{{ path('tva_edit', {'id': t_v_a.id}) }}"><button class="btn btn-primary">Modifier</button></a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="10">Aucune valeur référencée</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 {% endblock %}

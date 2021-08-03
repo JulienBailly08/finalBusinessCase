@@ -1,11 +1,18 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %}New Status{% endblock %}
+{% block title %}
+	- Statut
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Status</h1>
 
-    {{ include('status/_form.html.twig') }}
-
-    <a href="{{ path('status_index') }}">back to list</a>
+	<h1 class="text-center text-white">Ajout d'un nouveau Statut</h1>
+	<div class="container">
+		<div class="col-6">
+			{{ include('status/_form.html.twig') }}
+		</div>
+		<a href="{{ path('status_index') }}">
+			<button class="btn btn-warning">Retour</button>
+		</a>
+	</div>
 {% endblock %}

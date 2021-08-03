@@ -1,4 +1,20 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-8">
+            {{ form_start(form) }}
+            {{ form_row(form.title, {label: 'Nom du produit :' }) }}
+            {{ form_row(form.price, {label: 'Prix de vente HT :' }) }}
+            {{ form_row(form.description, {label: 'Description du produit  :' }) }}
+            {{ form_row(form.isActive, {label: 'Rendre le produit actif' }) }}    
+            {{ form_row(form.putInFront, {label: 'Produit phare (placer sur page d\'accueil)' }) }}
+            {{ form_row(form.tvaRate, {label: 'Taux de TVA  :' }) }}
+            {{ form_row(form.picture1,{'label' : 'Image 1 à uploader (obligatoire) : '}) }}
+            {{ form_row(form.picture2,{'label' : 'Image 2 à uploader (Facultative) : '}) }}
+            {{ form_row(form.picture3,{'label' : 'Image 3 à uploader (Facultative) : '}) }}
+            
+                <button class="btn btn-primary">{{ button_label|default('Valider') }}</button>
+            {{ form_end(form) }}
+        </div>    
+    </div>
+</div>
