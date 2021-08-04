@@ -12,7 +12,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="Un autre compte utilise déjà cette adresse E-mail")
+ * @ORM\Table(name="`user`")
+ * @UniqueEntity(fields={"username"}, message="Ce nom est déjà utilisé")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -24,7 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $email;
 
@@ -74,6 +75,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $commands;
 
+    /**
+     * @ORM\Column(type="string", length=180, unique=true)
+     */
+    private $username;
+
     public function __construct()
     {
         $this->adresses = new ArrayCollection();
@@ -104,7 +110,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**
@@ -112,7 +118,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string) $this->username;
     }
 
     /**
@@ -285,6 +291,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $command->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }
