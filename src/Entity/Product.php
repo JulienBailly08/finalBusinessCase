@@ -76,6 +76,12 @@ class Product
      */
     private $quantityOnCommands;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $brand;
+
     public function __construct()
     {
         $this->quantityOnCommands = new ArrayCollection();
@@ -232,6 +238,18 @@ class Product
                 $quantityOnCommand->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getBrand(): ?Brand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?Brand $brand): self
+    {
+        $this->brand = $brand;
 
         return $this;
     }

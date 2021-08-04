@@ -1,0 +1,39 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %} - Marques{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+		<div class="row">
+			<h1 class="text-center text-white">Marques existants</h1>
+
+			<a href="{{ path('brand_new') }}"><button class="btn btn-primary">Nouvelle Marque</button></a>
+				
+			
+			<table class="table">
+				<thead class="text-secondary">
+					<tr>
+						<th>Nom</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody class="text-white">
+					{% for brand in brands %}
+						<tr>
+							<td>{{ brand.brand }}</td>
+							<td>
+						    <a href="{{ path('brand_edit', {'id': brand.id}) }}"><button class="btn btn-primary">Modifier</button></a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="10">Aucune valeur référencée</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

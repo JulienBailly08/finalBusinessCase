@@ -10,6 +10,8 @@
 		<a class="btn btn-secondary m-5" href="{{ path('category_new') }}">Créer un nouvel univers</a>
 
 		<div class="row row-cols-1 row-cols-xl-2">
+
+
 			{% for category in categories %}
 				{% if category.parent is null %}
 					<div class="col">

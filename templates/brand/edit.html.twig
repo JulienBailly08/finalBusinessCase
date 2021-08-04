@@ -1,0 +1,18 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}
+	- Marques
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h1 class="text-white">Mise à jour du taux de TVA</h1>
+		<div class="col-6">
+			{{ include('brand/_form.html.twig',{'button_label': 'Mise à jour'}) }}
+		</div>
+		<a href="{{ path('brand_index') }}">
+			<button class="btn btn-warning">Retour</button>
+		</a>
+		{{ include('brand/_delete_form.html.twig') }}
+	</div>
+{% endblock %}

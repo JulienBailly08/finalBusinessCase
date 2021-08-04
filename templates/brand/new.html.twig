@@ -1,0 +1,15 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %} - Marques{% endblock %}
+
+{% block body %}
+    <h1 class="text-center text-white">Ajout d'une nouvelle Marque</h1>
+	<div class="container">
+		<div class="col-6">
+			{{ include('brand/_form.html.twig') }}
+		</div>
+		<a href="{{ path('brand_index') }}">
+			<button class="btn btn-warning">Retour</button>
+		</a>
+	</div>
+{% endblock %}

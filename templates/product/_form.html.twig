@@ -4,6 +4,7 @@
         <div class="col-8">
             {{ form_start(form) }}
             {{ form_row(form.title, {label: 'Nom du produit :' }) }}
+            {{ form_row(form.brand, {label: 'Marque du produit :' }) }}
             {{ form_row(form.price, {label: 'Prix de vente HT :' }) }}
             {{ form_row(form.description, {label: 'Description du produit  :' }) }}
             {{ form_row(form.isActive, {label: 'Rendre le produit actif' }) }}    

@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Brand;
 use App\Entity\TVA;
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
@@ -18,6 +19,10 @@ class ProductType extends AbstractType
         $builder
             ->add('title')
             ->add('price')
+            ->add('brand',EntityType::class,[
+                'class'=>Brand::class,
+                'choice_label'=>'Brand'
+            ])
             ->add('description')
             ->add('picture1',FileType::class, [
                 'label' => 'Image',
