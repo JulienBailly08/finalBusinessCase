@@ -9,9 +9,26 @@
 
 		<a class="btn btn-secondary m-5" href="{{ path('category_new') }}">Créer un nouvel univers</a>
 
+
+		{% macro recursiveCategory(category) %}
+			<li>
+				<h4>
+					<a href="#">{{ category }}</a>
+				</h4>
+
+				{% if category.children|length %}
+					<ul>
+						{% for child in category.children %}
+							{{ _self.recursiveCategory(child) }}
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</li>
+		{% endmacro %}
+
+
+
 		<div class="row row-cols-1 row-cols-xl-2">
-
-
 			{% for category in categories %}
 				{% if category.parent is null %}
 					<div class="col">
