@@ -9,17 +9,23 @@
 
 		<a class="btn btn-secondary m-5" href="{{ path('category_new') }}">Créer un nouvel univers</a>
 
-
 		{% macro recursiveCategory(category) %}
+			{% import _self as self %}
 			<li>
-				<h4>
-					<a href="#">{{ category }}</a>
-				</h4>
+				<p class="m-0 text-white">
+					{{category.name}}
+					{% if category.isActive == false %}
+						<span class="text-danger">Non actif</span>
+					{% endif %}
+					<a class="badge bg-secondary m-1" href="{{ path('category_edit', {'id': category.id}) }}">Modifier</a>
+					<a class="badge bg-primary m-1" href="{{ path('category_new_son',{'id': category.id}) }}">Ajouter sous cat</a>
+				</p>
 
-				{% if category.children|length %}
+
+				{% if category.categories|length %}
 					<ul>
-						{% for child in category.children %}
-							{{ _self.recursiveCategory(child) }}
+						{% for child in category.categories %}
+							{{ self.recursiveCategory(child) }}
 						{% endfor %}
 					</ul>
 				{% endif %}
@@ -27,14 +33,13 @@
 		{% endmacro %}
 
 
-
 		<div class="row row-cols-1 row-cols-xl-2">
 			{% for category in categories %}
 				{% if category.parent is null %}
 					<div class="col">
-						<div class=" bg-light rounded">
-							<div class="">
-								<p class="text-center m-3">Univers
+						<div class=" tailleMin rounded">
+							<div class="ps-3">
+								<h4 class="text-center text-white m-3">Univers
 									{% if category.isActive %}Actif
 									{% else %}
 										<span class="text-danger">Non actif</span>
@@ -43,41 +48,25 @@
 									{{category.name}}
 									<a class="btn btn-secondary m-1" href="{{ path('category_edit', {'id': category.id}) }}">Modifier</a>
 									<a class="btn btn-secondary m-1" href="{{ path('category_new_son',{'id': category.id}) }}">Ajouter sous cat</a>
-								</p>
-								{% for category1 in categories %}
-									<ul>
-										{% if category1.parent is not null and category1.parent.id == category.id %}
-											<li>{{category1.name}}
-												{{category1.id}}
-												{% if category1.isActive %}Actif
-												{% else %}
-													<span class="text-danger">Non actif</span>
-												{% endif %}
-												<a class="btn btn-secondary m-1" href="{{ path('category_edit', {'id': category1.id}) }}">Modifier</a>
-												<a class="btn btn-secondary m-1" href="{{ path('category_new_son',{'id': category1.id}) }}">Ajouter sous cat</a>
-												<ul>
-													{% for category2 in categories %}
-														{% if category2.parent is not null and category2.parent.id == category1.id %}
-															<li>{{category2.name}}
-																{% if category2.isActive %}Actif
-																{% else %}
-																	<span class="text-danger">Non actif</span>
-																{% endif %}
-																<a class="btn btn-secondary m-1" href="{{ path('category_edit', {'id': category2.id}) }}">Modifier</a>
-																<a class="btn btn-secondary m-1" href="{{ path('category_new_son',{'id': category2.id}) }}">Ajouter sous cat</a>
-															</li>
-														{% endif %}
-													{% endfor %}
-												</ul>
-											</li>
-										{% endif %}
-									</ul>
-								{% endfor %}
+								</h4>
+
+								{% from _self import recursiveCategory %}
+
+								{% if category %}
+									<div class="mt-5">
+										<ul>
+											{% for child in category.categories %}
+
+												{{ recursiveCategory(child) }}
+											{% endfor %}
+										</ul>
+									</div>
+								{% endif %}
+
 							</div>
 						</div>
 					</div>
 				{% endif %}
 			{% endfor %}
 		</div>
-	</div>
-{% endblock %}
+	{% endblock %}
