@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/quantity/on/command')]
+#[Route('/back/quantity/on/command')]
 class QuantityOnCommandController extends AbstractController
 {
     #[Route('/', name: 'quantity_on_command_index', methods: ['GET'])]

@@ -1,6 +1,6 @@
 <div class="collapse navbar-collapse flex-grow-1 flex-md-grow-0" id="navbarSupportedContent">
 	<ul class="navbar-nav mx-5 me-auto mb-2 mb-md-0">
-	{% for category in categories %}
+		{% for category in categories %}
 			{% if category.parent is null and category.isActive %}
 				<li class="nav-item dropdown px-2 m-0 m-xl-5 m-md-2">
 					<a class="nav-link dropdown-toggle text-primary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -21,5 +21,13 @@
 				</li>
 			{% endif %}
 		{% endfor %}
+
+		{% if is_granted('ROLE_EMPLOYEE') %}
+			<li class="nav-item px-2 m-0 m-xl-5 m-md-2">
+				<a class="nav-link btn btn-primary text-white" href={{ path('home_back') }} role="button">
+					Gestion du site
+				</a>
+			</li>
+		{% endif %}
 	</ul>
 </div>

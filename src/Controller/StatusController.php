@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/status')]
+#[Route('/back/status')]
 class StatusController extends AbstractController
 {
     #[Route('/', name: 'status_index', methods: ['GET'])]

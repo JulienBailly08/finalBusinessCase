@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/adress')]
+#[Route('/back/adress')]
 class AdressController extends AbstractController
 {
     #[Route('/', name: 'adress_index', methods: ['GET'])]

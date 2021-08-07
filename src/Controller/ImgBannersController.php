@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
-#[Route('/img/banners')]
+#[Route('/back/img/banners')]
 class ImgBannersController extends AbstractController
 {
     #[Route('/', name: 'img_banners_index', methods: ['GET'])]

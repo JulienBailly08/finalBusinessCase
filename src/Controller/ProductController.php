@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
-#[Route('/product')]
+#[Route('/back/product')]
 class ProductController extends AbstractController
 {
     #[Route('/', name: 'product_index', methods: ['GET'])]

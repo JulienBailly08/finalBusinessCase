@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/tva')]
+#[Route('/back/tva')]
 class TVAController extends AbstractController
 {
     #[Route('/', name: 'tva_index', methods: ['GET'])]
