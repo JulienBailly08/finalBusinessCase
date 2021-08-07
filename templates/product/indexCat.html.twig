@@ -1,0 +1,56 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}
+	- Produits
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row">
+			<h1 class="text-center text-white">Produits dans : {{category.name}} </h1>
+            <div>
+            <a href="{{ path('product_index') }}">
+				<button class="btn btn-primary">Retour à la liste des categories</button>
+			</a>
+			<a href="{{ path('product_new',{'id': category.id}) }}" class="m-4">
+				<button class="btn btn-primary">Ajout d'un produit</button>
+			</a>
+            </div>
+
+			<table class="table">
+				<thead class="text-secondary">
+					<tr>
+						<th>Nom du produit</th>
+						<th>Produit actif</th>
+						<th>Produit phare</th>
+                        <th>Actions</th>
+					</tr>
+				</thead>
+				<tbody class="text-white">
+					{% for product in products %}
+						<tr>
+
+							<td>{{ product.title }}</td>
+							<td>{{ product.isActive ? 'Oui' : 'Non' }}</td>
+							<td>{{ product.putInFront ? 'Oui' : 'Non' }}</td>
+							<td>
+								<a href="{{ path('product_show', {'id': product.id}) }}">
+									<button class="btn btn-primary">informations détaillées</button>
+								</a>
+								<a href="{{ path('product_edit', {'id': product.id}) }}">
+									<button class="btn btn-primary">Modifier</button>
+								</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="10">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+{% endblock %}

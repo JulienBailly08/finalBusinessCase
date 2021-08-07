@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Form\ProductType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use Doctrine\ORM\Mapping\Id;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,18 +26,20 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'product_cat', methods: ['GET'])]
-    public function indexCat(ProductRepository $productRepository): Response
+    #[Route('/cat/{id}', name: 'product_cat', methods: ['GET', 'POST'])]
+    public function indexCat($id,ProductRepository $productRepository,Category $category): Response
     {
+
         return $this->render('product/indexCat.html.twig', [
-            'products' => $productRepository->findAll(),
+            'products' => $productRepository->findBy(['category'=>$id]),
+            'category' =>$category
         ]);
     }
 
 
 
-    #[Route('/new', name: 'product_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, SluggerInterface $slugger): Response
+    #[Route('/new/{id}', name: 'product_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, SluggerInterface $slugger,Category $category): Response
     {
         $product = new Product();
         $form = $this->createForm(ProductType::class, $product);
@@ -83,7 +86,7 @@ class ProductController extends AbstractController
                 }
                 $product->setPicture3($newFileName);
             }
-
+            $product->setCategory($category);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($product);
             $entityManager->flush();

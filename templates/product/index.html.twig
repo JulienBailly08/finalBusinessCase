@@ -12,8 +12,8 @@
 				<p class="m-0 text-white">
 					{{category.name}}
 					
-					<a class="badge bg-secondary ms-4 m-1" href="{{ path('category_edit', {'id': category.id}) }}">Consulter les Produits</a>
-					<a class="badge bg-primary ms-4 m-1" href="{{ path('category_new_son',{'id': category.id}) }}">Ajout d'un produit</a>
+					<a class="badge bg-secondary ms-4 m-1" href="{{ path('product_cat', {'id': category.id}) }}">Consulter les Produits</a>
+					<a class="badge bg-primary ms-4 m-1" href="{{ path('product_new',{'id': category.id}) }}">Ajout d'un produit</a>
 				</p>
 
 
