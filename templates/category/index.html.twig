@@ -39,13 +39,13 @@
 					<div class="col">
 						<div class=" tailleMin rounded">
 							<div class="ps-3">
-								<h4 class="text-center text-white m-3">Univers
-									{% if category.isActive %}Actif
-									{% else %}
-										<span class="text-danger">Non actif</span>
+								<h4 class="text-center text-white m-3">Univers :
+									{% if category.isActive == false %}
+										<span class="text-danger">Non actif {{category.name}}</span>
+										{% else %}
+										{{category.name}}	
 									{% endif %}
-									:
-									{{category.name}}
+																		
 									<a class="btn btn-secondary m-1" href="{{ path('category_edit', {'id': category.id}) }}">Modifier</a>
 									<a class="btn btn-secondary m-1" href="{{ path('category_new_son',{'id': category.id}) }}">Ajouter sous cat</a>
 								</h4>

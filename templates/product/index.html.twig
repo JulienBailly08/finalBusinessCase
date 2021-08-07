@@ -1,49 +1,60 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %}Product index{% endblock %}
+{% block title %} - Produits{% endblock %}
 
 {% block body %}
-    <h1>Product index</h1>
+	<div class="container-fluid">
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>Picture1</th>
-                <th>Picture2</th>
-                <th>Picture3</th>
-                <th>IsActive</th>
-                <th>PutInFront</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for product in products %}
-            <tr>
-                <td>{{ product.id }}</td>
-                <td>{{ product.title }}</td>
-                <td>{{ product.price }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.picture1 }}</td>
-                <td>{{ product.picture2 }}</td>
-                <td>{{ product.picture3 }}</td>
-                <td>{{ product.isActive ? 'Yes' : 'No' }}</td>
-                <td>{{ product.putInFront ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('product_show', {'id': product.id}) }}">show</a>
-                    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('product_new') }}">Create new</a>
-{% endblock %}
+		{% macro recursiveCategory(category) %}
+			{% import _self as self %}
+			<li>
+				<p class="m-0 text-white">
+					{{category.name}}
+					
+					<a class="badge bg-secondary ms-4 m-1" href="{{ path('category_edit', {'id': category.id}) }}">Consulter les Produits</a>
+					<a class="badge bg-primary ms-4 m-1" href="{{ path('category_new_son',{'id': category.id}) }}">Ajout d'un produit</a>
+				</p>
+
+
+				{% if category.categories|length %}
+					<ul>
+						{% for child in category.categories %}
+							{{ self.recursiveCategory(child) }}
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</li>
+		{% endmacro %}
+
+
+		<div class="row row-cols-1 row-cols-xl-2">
+			{% for category in categories %}
+				{% if category.parent is null %}
+					<div class="col">
+						<div class=" tailleMin rounded">
+							<div class="ps-3">
+								<h4 class="text-center text-white m-3">Univers :
+									{{category.name}}
+								</h4>
+
+								{% from _self import recursiveCategory %}
+
+								{% if category %}
+									<div class="mt-5">
+										<ul>
+											{% for child in category.categories %}
+
+												{{ recursiveCategory(child) }}
+											{% endfor %}
+										</ul>
+									</div>
+								{% endif %}
+
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	{% endblock %}
