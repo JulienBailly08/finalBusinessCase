@@ -13,11 +13,17 @@ class UniversController extends AbstractController
     #[Route('/univers/{id}', name: 'univers')]
     public function index($id, ProductRepository $productRepository,CategoryRepository $categoryRepository): Response
     {
-                
+        $test="";
+        if (empty($productRepository->findBy(['category'=>$id]))):
+        $test="AH AH AH AH !" ;
+
+        endif;
+        
         return $this->render('univers/index.html.twig', [
             'products' => $productRepository->findBy(['category'=>$id]),
             'category' => $categoryRepository->findBy(['id'=>$id]),
-            'categorySons'=>$categoryRepository->findBy(['parent'=>$id])
+            'categorySons'=>$categoryRepository->findBy(['parent'=>$id]),
+            'test'=>$test
         ]);
     }
 }
