@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Univers {% endblock %}
+
+{% block body %}
+{% for product in products %}
+    {{product.title}}
+
+{% endfor %}
+
+{% endblock %}

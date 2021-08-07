@@ -11,7 +11,7 @@
 
 							{% if category1.parent is not null and category1.parent.id == category.id  and category1.isActive %}
 								<li>
-									<a class="dropdown-item text-secondary" href="">
+									<a class="dropdown-item text-secondary" href={{ path('univers',{'id':category1.id})}}>
 										{{category1.name |title}}
 									</a>
 								</li>

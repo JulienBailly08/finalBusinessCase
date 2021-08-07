@@ -12,8 +12,9 @@ body{
   background-repeat: no-repeat;
 }
 .tailleMinTemplate{
-  min-height: 752px;
+  min-height: 800px;
 }
+
 .tailleMin{
   min-height: 350px;
   background-color: rgba(218, 218, 204, 0.1);
