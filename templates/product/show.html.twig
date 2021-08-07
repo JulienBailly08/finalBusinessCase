@@ -1,54 +1,72 @@
 {% extends 'baseBack.html.twig' %}
 
-{% block title %}Product{% endblock %}
+{% block title %}
+	- produits
+{% endblock %}
 
 {% block body %}
-    <h1>Product</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ product.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ product.title }}</td>
-            </tr>
-            <tr>
-                <th>Price</th>
-                <td>{{ product.price }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ product.description }}</td>
-            </tr>
-            <tr>
-                <th>Picture1</th>
-                <td>{{ product.picture1 }}</td>
-            </tr>
-            <tr>
-                <th>Picture2</th>
-                <td>{{ product.picture2 }}</td>
-            </tr>
-            <tr>
-                <th>Picture3</th>
-                <td>{{ product.picture3 }}</td>
-            </tr>
-            <tr>
-                <th>IsActive</th>
-                <td>{{ product.isActive ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>PutInFront</th>
-                <td>{{ product.putInFront ? 'Yes' : 'No' }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('product_index') }}">back to list</a>
+	<div class="container-fluid">
+		<div class="row">
+			<h1 class="text-center text-white">Détail d'un produit</h1>
 
-    <a href="{{ path('product_edit', {'id': product.id}) }}">edit</a>
+			<a  class ="my-5" href="{{ path('product_cat', {'id': product.category.id}) }}">
+				<button class="btn btn-primary">Retour à la liste des produits de la catégorie</button>
+			</a>
+			<table class="table">
+				<tbody>
+					<tr>
+						<th class="text-secondary">Nom</th>
+						<td class="text-white">{{ product.title }}</td>
+					</tr>
+					<tr>
+						<th class="text-secondary">Prix HT</th>
+						<td class="text-white">{{ product.price }}</td>
+					</tr>
+					<tr>
+						<th class="text-secondary">Description</th>
+						<td class="text-white">{{ product.description }}</td>
+					</tr>
+					<tr>
+						<th class="text-secondary">Image 1</th>
+						<td class="text-white">{{ product.picture1 }}
+                        <img class="img-fluid" src="{{ asset('upload/'~ product.picture1)}}" width="200">
+                        </td>
+					</tr>
+					<tr>
+						<th class="text-secondary">Image 2</th>
+						<td {% if  product.picture2 is not null %}
+                            class="text-white">{{ product.picture2 }}
+                            <img class="img-fluid" src="{{ asset('upload/'~ product.picture2)}}" width="200">
+                        {% endif %}                        
+                        </td>
+					</tr>
+					<tr>
+						<th class="text-secondary">Image 3</th>
+						<td {% if  product.picture3 is not null %}
+                            class="text-white">{{ product.picture3 }}
+                            <img class="img-fluid" src="{{ asset('upload/'~ product.picture3)}}" width="200">
+                        {% endif %}
+                        </td>
+					</tr>
+					<tr>
+						<th class="text-secondary">Produit Actif</th>
+						<td class="text-white">{{ product.isActive ? 'Oui' : 'Non' }}</td>
+					</tr>
+					<tr>
+						<th class="text-secondary">Produit phare</th>
+						<td class="text-white">{{ product.putInFront ? 'Oui' : 'Non' }}</td>
+					</tr>
+				</tbody>
+			</table>
 
-    {{ include('product/_delete_form.html.twig') }}
-{% endblock %}
+
+
+
+            <a href="{{ path('product_edit', {'id': product.id}) }}">
+				<button class="btn btn-primary">Modification du produit</button>
+			</a>
+
+			{{ include('product/_delete_form.html.twig') }}
+		{% endblock %}

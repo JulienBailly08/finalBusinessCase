@@ -9,9 +9,9 @@
 		<div class="col-10">
 			{{ include('product/_form.html.twig',{'button_label': 'Mise à jour'}) }}
 		</div>
-		<a href="{{ path('product_index') }}">
-			<button class="btn btn-warning">Revenir à la gestion des Produits</button>
-		</a>
+		<a  class ="my-5" href="{{ path('product_cat', {'id': product.category.id}) }}">
+				<button class="btn btn-warning">Retour à la liste des produits de la catégorie</button>
+			</a>
      {{ include('product/_delete_form.html.twig') }}   
 	</div>
 

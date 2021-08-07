@@ -4,7 +4,7 @@
 			{% if category.parent is null and category.isActive %}
 				<li class="nav-item dropdown px-2 m-0 m-xl-5 m-md-2">
 					<a class="nav-link dropdown-toggle text-primary" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						{{category.name}}
+						{{category.name | title}}
 					</a>
 					<ul class="dropdown-menu border-0" aria-labelledby="navbarDropdown">
 						{% for category1 in categories %}
@@ -12,7 +12,7 @@
 							{% if category1.parent is not null and category1.parent.id == category.id  and category1.isActive %}
 								<li>
 									<a class="dropdown-item text-secondary" href="">
-										{{category1.name}}
+										{{category1.name |title}}
 									</a>
 								</li>
 							{% endif %}
