@@ -1,11 +1,107 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Univers {% endblock %}
+{% block title %}Univers
+{% endblock %}
 
 {% block body %}
-{% for product in products %}
-    {{product.title}}
 
-{% endfor %}
 
-{% endblock %}
+	<div class="container-fluid">
+		<div class="ps-5 row d-flex bannière  align-items-center mb-2" style="background-image: url({{ asset('upload/'~ category[0].img.url)}})">
+			<h2 class="text-center text-success m-4">{{category[0].name}}</h2>
+		</div>
+		<div class="row ps-5 pb-5">
+			<div class="col-12 col-md-3 col-xl-2 py-5 px-4 rounded bg-secondary tailleSticky sticky-top">
+
+				<form class="sticky-top">
+					<div class="col">
+						<div class="p-1 bg-white rounded d-flex flex-row flex-md-column row row-cols-3 row-cols-md-1">
+							<a href="" class=" col text-center d-block  pt-1 pt-md-3  mb-2 mb-md-4 mt-2 mt-md-0">Trier par prix</a>
+							<a href="" class=" col text-center d-block  pt-1  mb-2 mb-md-4 mt-2 mt-md-0">Trier par marque</a>
+							<a href="" class=" col text-center d-block  pt-1  mb-2 mb-md-4 mt-2 mt-md-0">Trier par autre</a>
+						</div>
+					</div>
+				</form>
+
+			</div>
+			<div class=" col-12 col-md-9 col-xl-10 px-4">
+				<div class="container-fluid">
+
+					{% if category[0].parent.parent is not null %}
+						<div class="row pt-3 pt-md-0">
+							<a href="{{ path('univers',{'id':category[0].parent.id})}}">
+								<div class="col">
+									<button type="button" class="btn btn-outline-primary">retour
+										{{ category[0].parent.name }}
+									</button>
+								</div>
+							</a>
+						</div>
+					{% endif %}
+
+
+					<div class="row pt-3 pt-md-0 row-cols-{{categorySons | length}}">
+
+						{% for categorySon in categorySons %}
+
+							<a href="{{ path('univers',{'id':categorySon.id})}}">
+								<div class="col text-center mb-3">
+									<button type="button" class="btn btn-outline-primary w-50">{{categorySon.name}}</button>
+								</div>
+							</a>
+
+						{% endfor %}
+
+					</div>
+
+
+					<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 gy-5 g-md-5 mb-5">
+
+
+						{% if products is empty %}
+                        {% for categorySon in categorySons %}                                                
+                            {% for product in categorySon.products %}
+                            <div class="col">
+										<div class="bg-white d-flex flex-column p-4 rounded-2">
+											<h3 class="text-center text-dark text-uppercase h6 mt-2 mb-3">{{product.title}}</h3>
+											<a href=""><img src="{{ asset('upload/'~ product.picture1)}}" class="img-fluid"></a>
+											<p class="text-end text-light">
+												{{product.price |number_format(2) }}
+												€ HT</p>
+											<p class="text-end text-primary">
+												{{ (product.price*product.tvaRate.rate) |number_format(2) }}
+												€ TTC</p>
+										</div>
+									</div>                      
+                            {% endfor %}
+                        
+                        {% endfor %}
+
+
+							{% else %}
+								{% for product in products %}
+
+									<div class="col">
+										<div class="bg-white d-flex flex-column p-4 rounded-2">
+											<h3 class="text-center text-dark text-uppercase h6 mt-2 mb-3">{{product.title}}</h3>
+											<a href=""><img src="{{ asset('upload/'~ product.picture1)}}" class="img-fluid"></a>
+											<p class="text-end text-light">
+												{{product.price |number_format(2) }}
+												€ HT</p>
+											<p class="text-end text-primary">
+												{{ (product.price*product.tvaRate.rate) |number_format(2) }}
+												€ TTC</p>
+										</div>
+									</div>
+								{% endfor %}
+						{% endif %}
+
+					</div>
+
+
+				</div>
+
+			</div>
+
+
+		{% endblock %}
