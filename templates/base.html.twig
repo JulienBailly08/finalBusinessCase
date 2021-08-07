@@ -1,21 +1,22 @@
 <html>
-    <head>
-        
-        {% include 'content/head.html.twig' %}  
-        <title>La Nîmes'Alerie {% block title %}{% endblock %}</title> 
+	<head>
 
-    </head>
+		{% include 'content/head.html.twig' %}
+		<title>La Nîmes'Alerie
+			{% block title %}{% endblock %}
+		</title>
 
-    <body>
-    <header>{% include 'content/header/navbar.html.twig' %}</header>
-   
-   
-  
+	</head>
 
-    {% block body %}{% endblock %}
+	<body>
+		<header>{% include 'content/header/navbar.html.twig' %}</header>
 
-        <footer>{% include 'content/footer/footer.html.twig' %}</footer>
 
-    </body>   
-        {% include 'content/script.html.twig' %}
-</html>
+		<div class="tailleMinTemplate"> {% block body %}{% endblock %}</div>
+			
+
+			<footer>{% include 'content/footer/footer.html.twig' %}</footer>
+
+		</body>
+		{% include 'content/script.html.twig' %}
+	</html>
