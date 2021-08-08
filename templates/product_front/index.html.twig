@@ -1,14 +1,68 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} - Produit{% endblock %}
+{% block title %}
+	- Produit
+{% endblock %}
 
 {% block body %}
 
+	<div class="container-fluid">
+		<div class="ps-5 row d-flex bannière  align-items-center mb-2" style="background-image: url({{ asset('upload/'~ product.category.img.url)}})">
+			<h2 class="text-center text-success m-4">{{product.category.name}}</h2>
+		</div>
+		<div class="row ps-5 pb-5">
+			<div class="col-12 col-md-3 col-xl-2 py-5 px-4 rounded bg-secondary tailleSticky sticky-top">
 
+				<div class="sticky-top">
+					<div class="col">
+						<div class="p-1 bg-white rounded d-flex flex-row flex-md-column row row-cols-3 row-cols-md-1">
+							<a href="" class=" col text-center d-block  pt-1 pt-md-3  mb-2 mb-md-4 mt-2 mt-md-0">Autres produits pouvant vos interesser</a>
+							<a href="" class=" col text-center d-block  pt-1  mb-2 mb-md-4 mt-2 mt-md-0">Autres produits pouvant vos interesser</a>
+							<a href="" class=" col text-center d-block  pt-1  mb-2 mb-md-4 mt-2 mt-md-0">Autres produits pouvant vos interesser</a>
+						</div>
+					</div>
+				</div>
 
-    {{ dump(product) }}
-
-
+			</div>
+			<div class=" col-12 col-md-9 col-xl-10 px-4">
+				<div class="container-fluid">
+					<div class=" row">
+						<a href="{{ path('univers',{'id':product.category.id})}}">
+							<div class="col mb-3 pt-3 pt-md-0">
+								<button type="button" class="btn btn-outline-primary">retour
+									{{product.category.name}}</button>
+							</div>
+						</a>
+					</div>
+					<div class="row">
+						<div class="col">
+							<div class="bg-white d-flex flex-column p-4 rounded-2">
+								<h3 class="text-center text-dark h6 mt-2 mb-3">{{product.title | upper}}</h3>
+								<div class="row">
+									<div class="col-6"><img src="{{ asset('upload/'~ product.picture1)}}" class="img-fluid"></div>
+									<div class="col-6 d-flex align-items-center">
+										<p>{{product.description}}</p>
+									</div>
+								</div>
+								<p class="text-end text-light">{{product.price |number_format(2) }}
+									€ HT</p>
+								<p class="text-end text-primary">{{ (product.price*product.tvaRate.rate) |number_format(2) }}
+									€ TTC</p>
+								<div class="row justify-content-end align-items-center">
+									<div class="col-2">
+										<input class="w-100" type="number" value="1" min="1">
+									</div>
+									<div class="col-3 d-flex align-items-center justify-content-end">
+										<button type="button" class="btn btn-secondary">Ajouter au panier</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 {% endblock %}
