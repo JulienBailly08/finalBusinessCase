@@ -13,17 +13,29 @@ class UniversController extends AbstractController
     #[Route('/univers/{id}', name: 'univers')]
     public function index($id, ProductRepository $productRepository,CategoryRepository $categoryRepository): Response
     {
-        $test="";
-        if (empty($productRepository->findBy(['category'=>$id]))):
-        $test="AH AH AH AH !" ;
+        $products =$productRepository->findBy(['category'=>$id]);
+        $category=$categoryRepository->findBy(['id'=>$id]);
+        $categorySons=$categoryRepository->findBy(['parent'=>$id]);
+        $arrayIds=[];
+        
+        // recuperation ID des produits des sous cat dans array pour effet de shuffle sur page univers vide
+        if (empty($products)):
+            foreach ($categorySons as $value) {
+                $int=$value->getProducts();
+                foreach ($int as $value) {
+                   $arrayIds[]=$value->getId();
+                }
+            }
+        shuffle($arrayIds);    
 
+             
         endif;
         
         return $this->render('univers/index.html.twig', [
-            'products' => $productRepository->findBy(['category'=>$id]),
-            'category' => $categoryRepository->findBy(['id'=>$id]),
-            'categorySons'=>$categoryRepository->findBy(['parent'=>$id]),
-            'test'=>$test
+            'products' => $products,
+            'category' => $category,
+            'categorySons'=>$categorySons,
+            'arrayIds'=>$arrayIds
         ]);
     }
 }

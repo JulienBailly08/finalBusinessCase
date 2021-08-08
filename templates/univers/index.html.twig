@@ -41,7 +41,6 @@
 
 
 					<div class="row pt-3 pt-md-0 row-cols-{{categorySons | length}}">
-
 						{% for categorySon in categorySons %}
 							<a href="{{ path('univers',{'id':categorySon.id})}}">
 								<div class="col text-center mb-3">
@@ -55,24 +54,26 @@
 
 
 						{% if products is empty %}
-                        {{test}}
-							{% for categorySon in categorySons %}
-								{% for product in categorySon.products %}
-									<div class="col">
-										<div class="bg-white d-flex flex-column p-4 rounded-2">
-											<h3 class="text-center text-dark text-uppercase h6 mt-2 mb-3">{{product.title}}</h3>
-											<a href=""><img src="{{ asset('upload/'~ product.picture1)}}" class="img-fluid"></a>
-											<p class="text-end text-light">
-												{{product.price |number_format(2) }}
-												€ HT</p>
-											<p class="text-end text-primary">
-												{{ (product.price*product.tvaRate.rate) |number_format(2) }}
-												€ TTC</p>
-										</div>
-									</div>
+							{% for arrayId in arrayIds %}
+								{% for categorySon in categorySons %}
+									{% for product in categorySon.products %}
+										{% if product.id == arrayId %}
+											<div class="col">
+												<div class="bg-white d-flex flex-column p-4 rounded-2">
+													<h3 class="text-center text-dark text-uppercase h6 mt-2 mb-3">{{product.title}}</h3>
+													<a href=""><img src="{{ asset('upload/'~ product.picture1)}}" class="img-fluid"></a>
+													<p class="text-end text-light">
+														{{product.price |number_format(2) }}
+														€ HT</p>
+													<p class="text-end text-primary">
+														{{ (product.price*product.tvaRate.rate) |number_format(2) }}
+														€ TTC</p>
+												</div>
+											</div>
+										{% endif %}
+									{% endfor %}
 								{% endfor %}
 							{% endfor %}
-
 
 						{% else %}
 							{% for product in products %}
