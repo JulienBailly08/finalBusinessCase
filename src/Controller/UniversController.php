@@ -27,7 +27,6 @@ class UniversController extends AbstractController
                 }
             }
         shuffle($arrayIds);    
-
              
         endif;
         
