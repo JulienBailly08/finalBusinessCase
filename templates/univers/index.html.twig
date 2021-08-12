@@ -78,8 +78,8 @@
 						{% else %}
 							{% for product in products %}
 
-								<div class="col">
-									<div class="bg-white d-flex flex-column p-4 rounded-2">
+								<div class="col tailleCardUnivers">
+									<div class="bg-white p-4 rounded-2 d-flex flex-column justify-content-between">
 										<h3 class="text-center text-dark text-uppercase h6 mt-2 mb-3">{{product.title}}</h3>
 										<a href="{{ path('product_front',{'id':product.id})}}"><img src="{{ asset('upload/'~ product.picture1)}}" class="img-fluid"></a>
 										<p class="text-end text-light">

@@ -14,7 +14,11 @@ body{
   height: 940px;
 }
 .tailleMinTemplate{
-  min-height: 675px;
+  min-height: 100vh;
+}
+
+.tailleCardUnivers{
+  min-height: 20vh;
 }
 .carousel-inner{
     width:100%;
