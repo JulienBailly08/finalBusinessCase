@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+{% block title %}
+	- Compte
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row justify-content-center">
+			<div class="col-8">
+
+				{{ form_start(form) }}
+				{{ form_row(form.gender, {label: 'Civilité :' }) }}
+				{{ form_row(form.firstname,{label : 'Prénom : '}) }}
+				{{ form_row(form.lastname,{label : 'Nom : '}) }}
+				{{ form_row(form.dateOfBirth,{label : 'Date de naissance : '}) }}
+				{{ form_row(form.email,{label : 'Email :'}) }}
+				{{ form_row(form.newsletter,{label : 'Abonnement à la newsletter'}) }}
+				<button class="btn btn-primary">{{ button_label|default('valider') }}</button>
+				{{ form_end(form) }}
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

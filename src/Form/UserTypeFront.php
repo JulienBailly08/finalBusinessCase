@@ -9,14 +9,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
-class UserType extends AbstractType
+class UserTypeFront extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('email')
             ->add('newsletter')
-            //->add('roles')
             //->add('password')
             ->add('firstname')
             ->add('lastname')
@@ -33,7 +32,7 @@ class UserType extends AbstractType
                     'year' => 'Année', 'month' => 'Mois', 'day' => 'Jour',
                 ]
             ])
-            ->add('isVerified')
+            
         ;
     }
 

@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	- Compte
+{% endblock %}
+
+{% block body %}
+
+	<section class="container pt-5 mb-5">
+		<h2 class="text-center text-warning m-4">Mes informations</h2>
+
+		<div class="row g-3">
+			<div class="col-sm-6">
+				<label for="gender" class="form-label text-primary">Genre</label>
+				{% if user.gender == 0 %}
+					<input disabled type="text" class="form-control" id="gender" placeholder="Monsieur">
+				{% else %}
+					<input disabled type="text" class="form-control" id="gender" placeholder="Madame">
+				{% endif %}
+
+			</div>
+			<div class="col-sm-6">
+				<label for="lastName" class="form-label text-primary">Nom</label>
+				<input disabled type="text" class="form-control" id="lastName" placeholder={{user.lastname | capitalize}}>
+			</div>
+
+			<div class="col-sm-6">
+				<label for="firstName" class="form-label text-primary">Prénom</label>
+				<input disabled type="text" class="form-control" id="firstName" placeholder={{user.firstname | title}}>
+			</div>
+
+			<div class="col-sm-6">
+				<label for="dateOfBirth" class="form-label text-primary">Date de naissance</label>
+				<input disabled type="text" class="form-control" id="dateOfBirth" placeholder={{user.dateOfBirth |date ("d-m-Y") }}>
+			</div>
+
+			<div class="col-sm-6">
+				<label for="email" class="form-label text-primary">Adresse Email</label>
+				<input disabled type="email" class="form-control" id="email" placeholder={{user.email}}>
+			</div>
+			<div class="col-sm-6">
+				<label class="form-label text-primary">Abonnement à la Newsletter</label>
+				{% if user.newsletter == 0 %}
+					<input disabled type="text" class="form-control" placeholder="Désactivé">
+				{% else %}
+					<input disabled type="text" class="form-control" placeholder="Activé">
+				{% endif %}
+			</div>
+			<div class="col-12 d-flex justify-content-center">
+				<a href={{path('user_front_edit')}} class="btn btn-secondary mt-4">Modifier ces informations</a>
+			</div>
+
+			<hr class="mt-5">
+
+			{% for adress in adresses %}
+
+				<div class="col-sm-3">
+					<label for="number" class="form-label text-primary">Numéro</label>
+					<input disabled type="text" class="form-control" id="number" placeholder={{adress.number}}>
+				</div>
+				<div class="col-sm-3">
+					<label for="type" class="form-label text-primary">Type de voie</label>
+					<input disabled type="text" class="form-control" id="type" placeholder={{adress.type}}>
+				</div>
+				<div class="col-sm-6">
+					<label for="name" class="form-label text-primary">Adresse</label>
+					<input disabled type="text" class="form-control" id="name" placeholder={{adress.name }}>
+				</div>
+				<div class="col-sm-3">
+					<label for="postalCode" class="form-label text-primary">Code Postale</label>
+					<input disabled type="text" class="form-control" id="postalCode" placeholder={{adress.postalCode}}>
+				</div>
+				<div class="col-sm-3">
+					<label for="city" class="form-label text-primary">Ville</label>
+					<input disabled type="text" class="form-control" id="city" placeholder={{adress.city}}>
+				</div>
+				<div class="col-sm-6">
+					<label for="country" class="form-label text-primary">Pays</label>
+					<input disabled type="text" class="form-control" id="country" placeholder={{adress.country}}>
+				</div>
+				<div class="col-12 d-flex justify-content-center">
+					<a href= class="btn btn-secondary mt-4">Modification de l'adresse</a>
+				</div>
+
+			{% endfor %}
+
+		</div>
+
+
+	</section>
+
+
+{% endblock %}
