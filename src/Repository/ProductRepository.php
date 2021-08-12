@@ -19,6 +19,23 @@ class ProductRepository extends ServiceEntityRepository
         parent::__construct($registry, Product::class);
     }
 
+
+    /**
+    * @return Product les 3 produits similaires
+    */
+    public function similarProducts($produit)
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.category = :Cat')
+            ->andWhere('p.id != :id')
+            ->setParameter('Cat', $produit->getCategory()->getId())
+            ->setParameter('id', $produit->getId())
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

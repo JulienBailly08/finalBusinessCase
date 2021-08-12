@@ -16,9 +16,14 @@
 				<div class="sticky-top">
 					<div class="col">
 						<div class="p-1 bg-white rounded d-flex flex-row flex-md-column row row-cols-3 row-cols-md-1">
-							<a href="" class=" col text-center d-block  pt-1 pt-md-3  mb-2 mb-md-4 mt-2 mt-md-0">Autres produits pouvant vos interesser</a>
-							<a href="" class=" col text-center d-block  pt-1  mb-2 mb-md-4 mt-2 mt-md-0">Autres produits pouvant vos interesser</a>
-							<a href="" class=" col text-center d-block  pt-1  mb-2 mb-md-4 mt-2 mt-md-0">Autres produits pouvant vos interesser</a>
+						<p class="text-primary text-center h5">Autres produits susceptibles de vous interesser</p>
+
+							{% for similar in similars %}
+							<div class=" col text-center d-block  pt-1 pt-md-3  mb-2 mb-md-4 mt-2 mt-md-0">
+							<a href="{{ path('product_front',{'id':similar.id})}}"><img src="{{ asset('upload/'~ similar.picture1)}}" class="img-fluid" alt=""></a>	
+							</div>
+							{% endfor %}
+
 						</div>
 					</div>
 				</div>

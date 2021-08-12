@@ -12,8 +12,11 @@ class ProductFrontController extends AbstractController
     #[Route('/product/{id}', name: 'product_front')]
     public function index($id, ProductRepository $productRepository): Response
     {
-        return $this->render('product_front/index.html.twig', [
+            $product =$productRepository->findOneBy(['id'=> $id]);
+
+             return $this->render('product_front/index.html.twig', [
             'product' => $productRepository->findOneBy(['id'=> $id]),
+            'similars' => $productRepository->similarProducts($product),
         ]);
     }
 }

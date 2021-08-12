@@ -12,7 +12,7 @@ body{
   background-repeat: no-repeat;
 }
 .tailleMinTemplate{
-  min-height: 800px;
+  min-height: 90vh;
 }
 
 .tailleMin{
