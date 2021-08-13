@@ -16,7 +16,27 @@ class UniversController extends AbstractController
         $products =$productRepository->findBy(['category'=>$id]);
         $category=$categoryRepository->findBy(['id'=>$id]);
         $categorySons=$categoryRepository->findBy(['parent'=>$id]);
-        $arrayIds=[];
+        $arrayIds = [];
+
+
+
+        function recursCat($category){   
+        $results=[];
+        if($category->getParent()->getParent() != null):
+            dump($category->getParent()->getName());
+        array_unshift($results, $category->getParent()->getName());    
+        
+        recursCat($category->getParent());
+        else :
+        array_unshift($results, $category->getParent()->getName()); 
+        dump($category->getParent()->getName());
+        endif;
+
+        return $results;
+        }
+
+        dump(recursCat($category[0]));
+
         
         // recuperation ID des produits des sous cat dans array pour effet de shuffle sur page univers vide
         if (empty($products)):

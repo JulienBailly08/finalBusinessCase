@@ -14,7 +14,7 @@
 										<p>Bienvenue
 										{{ app.user.firstname | title}}
 										{{ app.user.lastname | upper}}</p>
-										<a href="{{path('user')}}" class="text-center">gestion des informations personnelles</a>
+										<a class="btn btn-primary text-white" href="{{path('user')}}">Gestion des informations personnelles</a>
 
 									{% else %}
 

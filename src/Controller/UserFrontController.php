@@ -32,7 +32,6 @@ class UserFrontController extends AbstractController
 
             return $this->redirectToRoute('user', [], Response::HTTP_SEE_OTHER);
         }
-            dump($form);
         return $this->renderForm('user_front/userEdit.html.twig', [
             'user' => $user,
             'form' => $form,
