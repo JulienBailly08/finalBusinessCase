@@ -8,7 +8,9 @@
 	<div class="container-fluid">
 		<div class="row">
 	
-			<h1 class="text-center text-white">Produits dans : {{category.parent.name}} {{category.name | title}} </h1>
+			<h1 class="text-center text-white">Produits dans : {% for item in arianeArray %}
+			{{item.name | title}} >>
+			{% endfor %} {{category.name | title}} </h1>
             <div>
             <a href="{{ path('product_index') }}">
 				<button class="btn btn-primary">Retour à la liste des categories</button>

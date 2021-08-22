@@ -30,9 +30,30 @@ class ProductController extends AbstractController
     public function indexCat($id,ProductRepository $productRepository,Category $category): Response
     {
 
+        $results=[]; // a finaliser !! localisation de la fn ? portée des variables ?
+        
+
+        function recursCat($category){   
+        global $results;
+        
+        if($category->getParent()->getParent() != null):
+        $results[]=['name'=>$category->getParent()->getName()];
+        recursCat($category->getParent());
+        else :
+
+        $results[]=['name'=>$category->getParent()->getName()];  
+        endif;
+
+        return $results;
+        }
+        
+        $arianeArray=array_reverse(recursCat($category));
+        dump($arianeArray);
+        
         return $this->render('product/indexCat.html.twig', [
             'products' => $productRepository->findBy(['category'=>$id]),
-            'category' =>$category
+            'category' =>$category,
+            'arianeArray'=>$arianeArray
         ]);
     }
 

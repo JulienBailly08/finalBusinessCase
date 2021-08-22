@@ -27,12 +27,17 @@
 					<label for="inputPassword">Mot de passe</label>
 					<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
-					<input
-					type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+					<div class="d-flex justify-content-between">
+						<button class=" my-4 btn btn-lg btn-primary" type="submit">
+							Soumettre
+						</button>
 
-					<button class=" my-4 btn btn-lg btn-primary" type="submit">
-						Soumettre
-					</button>
+						<a href={{path('app_register')}} class=" my-4 btn btn-lg btn-primary">
+							Pas encore de compte chez nous ?
+						</a>
+					</div>
+
 				{% endif %}
 			</form>
 		</div>
