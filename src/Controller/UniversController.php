@@ -17,25 +17,24 @@ class UniversController extends AbstractController
         $category=$categoryRepository->findBy(['id'=>$id]);
         $categorySons=$categoryRepository->findBy(['parent'=>$id]);
         $arrayIds = [];
-
+        $results=[];
 
 
         function recursCat($category){   
-        $results=[];
-        if($category->getParent()->getParent() != null):
-            dump($category->getParent()->getName());
-        array_unshift($results, $category->getParent()->getName());    
+        global $results;
         
+        if($category->getParent()->getParent() != null):
+        $results[]=['name'=>$category->getParent()->getName(),'id'=>$category->getParent()->getId(),'root'=>false];
         recursCat($category->getParent());
         else :
-        array_unshift($results, $category->getParent()->getName()); 
-        dump($category->getParent()->getName());
+
+        $results[]=['name'=>$category->getParent()->getName(),'id'=>$category->getParent()->getId(),'root'=>true];  
         endif;
 
         return $results;
         }
-
-        dump(recursCat($category[0]));
+        //$results=array_reverse(recursCat($category[0]));
+        
 
         
         // recuperation ID des produits des sous cat dans array pour effet de shuffle sur page univers vide
@@ -54,7 +53,8 @@ class UniversController extends AbstractController
             'products' => $products,
             'category' => $category,
             'categorySons'=>$categorySons,
-            'arrayIds'=>$arrayIds
+            'arrayIds'=>$arrayIds,
+            'arianeArray'=>array_reverse(recursCat($category[0]))
         ]);
     }
 }

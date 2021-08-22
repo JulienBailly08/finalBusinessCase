@@ -5,41 +5,6 @@
 
 {% block body %}
 
-
-{% set tab = {'foo': 'bar'} %}
-{{dump(tab)}}
-
-{% set foo = 'foo' ~ 'bar' %}
-{{dump(tab)}}
-
-	{% macro recursiveCategoryParent(item) %}
-		{% import _self as self %}
-
-				{% if item.parent.parent is not null %}
-
-					<li class="breadcrumb-item">
-						<a href="#">{{item.parent.name | title}}</a>
-					</li>
-
-					{{self.recursiveCategoryParent(item.parent) }}
-					
-				{% else %}
-
-					<li class="breadcrumb-item active" aria-current="page">{{item.parent.name}}</li>
-
-				{% endif %}
-	
-	{% endmacro %}
-
-
-	{% from _self import recursiveCategoryParent %}
-	<nav aria-label="breadcrumb">
-		<ol class="breadcrumb">
-			{{recursiveCategoryParent(category[0])}}
-		</ol>
-	</nav>
-
-
 	<div class="container-fluid">
 		<div class="ps-5 row d-flex bannière  align-items-center mb-2" style="background-image: url({{ asset('upload/'~ category[0].img.url)}})">
 			<h2 class="text-center text-success m-4">{{category[0].name}}</h2>
@@ -61,18 +26,22 @@
 			<div class=" col-12 col-md-9 col-xl-10 px-4">
 				<div class="container-fluid">
 
-					{% if category[0].parent.parent is not null %}
-						<div class="row pt-3 pt-md-0">
-							<a href="{{ path('univers',{'id':category[0].parent.id})}}">
-								<div class="col">
-									<button type="button" class="btn btn-outline-primary">retour
-										{{ category[0].parent.name }}
-									</button>
-								</div>
-							</a>
-						</div>
-					{% endif %}
-
+					<div aria-label="breadcrumb">
+						<ol class="breadcrumb">
+							{% for item in arianeArray %}
+							
+								{% if item.root %}
+								<li class="breadcrumb-item">
+											<span class="text-secondary">{{item.name | title}}</span>
+										</li>
+									{% else %}
+										<li class="breadcrumb-item">
+											<a href="{{ path('univers',{'id':item.id})}}">{{item.name | title}}</a>
+										</li>
+								{% endif %}
+							{% endfor %}
+						</ol>
+					</div>
 
 					<div class="row pt-3 pt-md-0 row-cols-{{categorySons | length}}">
 						{% for categorySon in categorySons %}
