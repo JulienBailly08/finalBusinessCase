@@ -26,18 +26,23 @@
 			<div class=" col-12 col-md-9 col-xl-10 px-4">
 				<div class="container-fluid">
 
-					<div aria-label="breadcrumb">
+					<div style="--bs-breadcrumb-divider: '>>';" aria-label="breadcrumb">
 						<ol class="breadcrumb">
 							{% for item in arianeArray %}
-							
+
 								{% if item.root %}
-								<li class="breadcrumb-item">
-											<span class="text-secondary">{{item.name | title}}</span>
-										</li>
-									{% else %}
-										<li class="breadcrumb-item">
-											<a href="{{ path('univers',{'id':item.id})}}">{{item.name | title}}</a>
-										</li>
+									<li class="breadcrumb-item">
+										<span class="badge rounded-pill bg-warning">{{item.name | title}}</span>
+									</li>
+								{% elseif item.current %}
+									<li class="breadcrumb-item active">
+										<a>{{item.name | title}}</a>
+									</li>
+								{% else %}
+									<li class="breadcrumb-item">
+										<a href="{{ path('univers',{'id':item.id})}}">{{item.name | title}}</a>
+									</li>
+
 								{% endif %}
 							{% endfor %}
 						</ol>
