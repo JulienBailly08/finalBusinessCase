@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Form\UserTypeFront;
+use App\Form\AdressType;
+use App\Entity\Adress;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +22,7 @@ class UserFrontController extends AbstractController
             'adresses' => $adresses
         ]);
     }
+
     #[Route('/user/edit', name: 'user_front_edit')]
     public function userEdition(Request $request): Response
     {
@@ -35,6 +38,32 @@ class UserFrontController extends AbstractController
         return $this->renderForm('user_front/userEdit.html.twig', [
             'user' => $user,
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/userAdress/edit', name: 'user_front-adress_edit')]
+    public function adressEdition(Request $request): Response
+    {
+        $user = $this->getUser();
+        $adresses = new Adress;
+        $adresses = $user->getAdresses();
+
+        foreach ($adresses as $key => $adress) {
+            $form = $this->createForm(AdressType::class, $adress);
+        }
+
+        $form->handleRequest($request);
+
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('user', [], Response::HTTP_SEE_OTHER);
+        }
+        return $this->renderForm('user_front/adressEdit.html.twig', [
+            'user' => $user,
+            'adress' =>$adress,
+            'form' => $form
         ]);
     }
 }
