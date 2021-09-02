@@ -11,7 +11,7 @@
 
 		{% macro recursiveCategory(category) %}
 			{% import _self as self %}
-			<li>
+			<ul>
 				<p class="m-0 text-white">
 					{{category.name}}
 					{% if category.isActive == false %}
@@ -23,23 +23,24 @@
 
 
 				{% if category.categories|length %}
-					<ul>
+					<li>
 						{% for child in category.categories %}
 							{{ self.recursiveCategory(child) }}
 						{% endfor %}
-					</ul>
+					</li>
 				{% endif %}
-			</li>
+			</ul>
 		{% endmacro %}
 
 
 		<div class="row row-cols-1 row-cols-xl-2">
+		{% dump(categories) %}
 			{% for category in categories %}
 				{% if category.parent is null %}
 					<div class="col">
 						<div class=" tailleMin rounded">
 							<div class="ps-3">
-								<h4 class="text-center text-white m-3">Univers :
+								<h4 class="text-center text-white m-2">Univers :
 									{% if category.isActive == false %}
 										<span class="text-danger">Non actif {{category.name}}</span>
 										{% else %}
@@ -53,13 +54,13 @@
 								{% from _self import recursiveCategory %}
 
 								{% if category %}
-									<div class="mt-5">
-										<ul>
+									<div class="mt-1">
+										<li>
 											{% for child in category.categories %}
 
 												{{ recursiveCategory(child) }}
 											{% endfor %}
-										</ul>
+										</li>
 									</div>
 								{% endif %}
 							</div>

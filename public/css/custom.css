@@ -2194,7 +2194,7 @@ progress {
 
 .form-label {
   margin-bottom: 0.5rem;
-  color: rgba(255, 255, 153, 0.8);
+  color: #ff6c02;
 }
 
 .col-form-label {
@@ -2203,7 +2203,7 @@ progress {
   margin-bottom: 0;
   font-size: inherit;
   line-height: 1.5;
-  color: rgba(255, 255, 153, 0.8);
+  color: #ff6c02;
 }
 
 .col-form-label-lg {
@@ -2583,7 +2583,7 @@ textarea.form-control-lg {
 }
 
 .form-check-label {
-  color: rgba(255, 255, 153, 0.8);
+  color: black;
 }
 
 .form-switch {
