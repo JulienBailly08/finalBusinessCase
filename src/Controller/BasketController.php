@@ -55,8 +55,9 @@ class BasketController extends AbstractController
         }
 
         $session->set('basket', $basket);
+        $this->addFlash('success', 'Article ajouté à votre panier');
 
-        return $this->redirectToRoute('basket');
+        return $this->redirectToRoute('product_front',['id'=> $id]);
 
     
     }
