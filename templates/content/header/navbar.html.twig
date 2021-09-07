@@ -10,12 +10,12 @@
 			{{ render(path('menu')) }}
 
 			<div class=" justify-content-center d-none d-md-inline-flex">
-				<a class=" px-2 px-lg-3 order-2" href="#"><img src="{{ asset('img/panier.png')}}"/></a>
+				<a class=" px-2 px-lg-3 order-2" href="{{path('basket')}}"><img src="{{ asset('img/panier.png')}}"/></a>
 				<a class=" px-3 px-lg-5 order-1" href="#"><img src="{{ asset('img/login.png')}}" data-bs-toggle="modal" data-bs-target="#login"/></a>
 			</div>
 		</div>
 		<div class=" col-12 justify-content-around d-md-none d-inline-flex ">
-			<a class=" px-5 order-2" href="#"><img src="{{ asset('img/panier.png')}}"/></a>
+			<a class=" px-5 order-2" href="{{path('basket')}}"><img src="{{ asset('img/panier.png')}}"/></a>
 			<a class=" px-5 order-1" href="#"><img src="{{ asset('img/login.png')}}" data-bs-toggle="modal" data-bs-target="#login"/></a>
 		</div>
 	</nav>
