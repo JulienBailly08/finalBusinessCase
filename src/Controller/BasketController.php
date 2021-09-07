@@ -56,8 +56,19 @@ class BasketController extends AbstractController
 
         $session->set('basket', $basket);
 
-        dd($session->get('basket'));
+        return $this->redirectToRoute('basket');
 
     
+    }
+    #[Route('/basket/remove/{id}', name: 'basket_remove')]
+    public function remove($id, SessionInterface $session){
+
+        $basket = $session->get('basket', []);
+        if (!empty($basket[$id])){
+            unset($basket[$id]);
+        }
+        $session->set('basket', $basket);
+        return $this->redirectToRoute("basket");
+
     }
 }

@@ -31,7 +31,7 @@
 						<td>{{(item.product.price*item.product.tvaRate.rate*item.quantity) |number_format(2) }}
 							€</td>
 						<td>
-							<a href="#" class="btn btn-danger btn-sm">
+							<a href="{{path('basket_remove',{'id':item.product.id})	}}" class="btn btn-danger btn-sm">
 								<i class="bi bi-trash"></i>
 							</a>
 
