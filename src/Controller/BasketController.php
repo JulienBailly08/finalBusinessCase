@@ -23,11 +23,23 @@ class BasketController extends AbstractController
                 'quantity' => $quantity
             ];
         }
-        
-        dd($basketFull);
-        
+        $totalHT = 0;
+        $totalTTC = 0;
+
+        foreach ($basketFull as $item) {
+            $totalItem = $item['product']->getPrice()*$item['quantity'];
+            $totalHT+= $totalItem;
+        }
+        foreach ($basketFull as $item) {
+            
+            $totalItem = $item['product']->getPrice()*$item['product']->getTvaRate()->getRate()*$item['quantity'];
+            $totalTTC+= $totalItem;
+        }
+              
         return $this->render('basket/index.html.twig', [
-            'controller_name' => 'BasketController',
+            'items' => $basketFull,
+            'totalHT' => $totalHT,
+            'totalTTC' => $totalTTC
         ]);
     }
 
@@ -45,5 +57,7 @@ class BasketController extends AbstractController
         $session->set('basket', $basket);
 
         dd($session->get('basket'));
+
+    
     }
 }
