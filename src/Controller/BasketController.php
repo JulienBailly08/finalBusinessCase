@@ -43,19 +43,20 @@ class BasketController extends AbstractController
         ]);
     }
 
-    #[Route('/basket/add/{id}', name: 'basket_add')]
+    #[Route('/basket/add/{id}', name: 'basket_add', methods:['GET', 'POST'])]
     public function add($id, SessionInterface $session)
     {
         $basket = $session->get('basket', []);
+         
 
         if (!empty($basket[$id])) {
-            $basket[$id]++;
+            $basket[$id]+=$_POST['quantityToAdd'];
         } else {
-            $basket[$id] = 1;
+            $basket[$id] = $_POST['quantityToAdd'];
         }
 
         $session->set('basket', $basket);
-        $this->addFlash('success', 'Article ajouté à votre panier');
+        $this->addFlash('success', 'Article ajouté à votre');
 
         return $this->redirectToRoute('product_front',['id'=> $id]);
 
