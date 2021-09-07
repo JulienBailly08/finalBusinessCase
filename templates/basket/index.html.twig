@@ -22,7 +22,7 @@
 			<tbody>
 				{% for item in items %}
 					<tr>
-						<td>{{item.product.title}}</td>
+						<td><a href="{{ path('product_front',{'id':item.product.id})}}">{{item.product.title}}</a></td>
 						<td>{{item.product.price |number_format(2)}}
 							€</td>
 						<td>{{ (item.product.price*item.product.tvaRate.rate) |number_format(2) }}
