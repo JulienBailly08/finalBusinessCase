@@ -36,6 +36,19 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
+
+    /**
+    * @return Product Produits phares
+    */
+    public function likedProducts()
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.putInFront = 1')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */
