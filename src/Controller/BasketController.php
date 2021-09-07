@@ -2,17 +2,48 @@
 
 namespace App\Controller;
 
+use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class BasketController extends AbstractController
 {
     #[Route('/basket', name: 'basket')]
-    public function index(): Response
+    public function index(SessionInterface $session, ProductRepository $productRepository): Response
     {
+        
+        $basket = $session->get('basket', []);
+        $basketFull=[];
+
+        foreach ($basket as $id => $quantity) {
+            $basketFull[] = [
+                'product' => $productRepository->find($id),
+                'quantity' => $quantity
+            ];
+        }
+        
+        dd($basketFull);
+        
         return $this->render('basket/index.html.twig', [
             'controller_name' => 'BasketController',
         ]);
+    }
+
+    #[Route('/basket/add/{id}', name: 'basket_add')]
+    public function add($id, SessionInterface $session)
+    {
+        $basket = $session->get('basket', []);
+
+        if (!empty($basket[$id])) {
+            $basket[$id]++;
+        } else {
+            $basket[$id] = 1;
+        }
+
+        $session->set('basket', $basket);
+
+        dd($session->get('basket'));
     }
 }
