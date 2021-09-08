@@ -60,8 +60,22 @@ class BasketController extends AbstractController
 
         return $this->redirectToRoute('product_front',['id'=> $id]);
 
+    }
+
+    #[Route('/basket/update/{id}', name: 'basket_update', methods:['GET', 'POST'])]
+    public function update($id, SessionInterface $session){
+    
+        $basket = $session->get('basket');
+
+        $basket[$id] = $_POST['quantityUpdate'];
+
+        $session->set('basket', $basket);
+       
+        return $this->redirectToRoute('basket');
+
     
     }
+    
     #[Route('/basket/remove/{id}', name: 'basket_remove')]
     public function remove($id, SessionInterface $session){
 
