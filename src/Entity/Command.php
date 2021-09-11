@@ -46,6 +46,11 @@ class Command
      */
     private $ClickAndCollect;
 
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $payment;
+
     public function __construct()
     {
         $this->quantityOnCommands = new ArrayCollection();
@@ -130,6 +135,18 @@ class Command
     public function setClickAndCollect(bool $ClickAndCollect): self
     {
         $this->ClickAndCollect = $ClickAndCollect;
+
+        return $this;
+    }
+
+    public function getPayment(): ?string
+    {
+        return $this->payment;
+    }
+
+    public function setPayment(string $payment): self
+    {
+        $this->payment = $payment;
 
         return $this;
     }
