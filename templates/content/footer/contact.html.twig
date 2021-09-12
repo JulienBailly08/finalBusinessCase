@@ -11,15 +11,15 @@
                                         <div class="col">
                                             <div class="mb-1 text-start">
                                                 <label for="prenom" class="form-label text-primary">Prénom</label>
-                                                <input type="text" class="form-control" id="prenom" placeholder="Sibylle">
+                                                <input type="text" value="{% if app.user is not empty %}{{app.user.firstname | title}}{% endif %}" class="form-control" id="prenom" placeholder="Sibylle">
                                             </div>
                                             <div class="mb-1 text-start">
                                                 <label for="nom" class="form-label text-primary">Nom</label>
-                                                <input type="text" class="form-control" id="nom" placeholder="Cassandre">
+                                                <input type="text" value="{% if app.user is not empty %}{{app.user.lastname | upper}}{% endif %}"class="form-control" id="nom" placeholder="BAILLY">
                                             </div>
                                             <div class="mb-1 text-start">
                                                 <label for="e_mail" class="form-label text-primary">Adresse Email</label>
-                                                <input type="email" class="form-control" id="e_mail" placeholder="sibylle.cassandre@lilo.org">
+                                                <input type="email" value="{% if app.user is not empty %}{{app.user.email}}{% endif %}"class="form-control" id="e_mail" placeholder="ciboulette@lilo.org">
                                             </div>
                                             <div class="mb-1 text-start">
                                                 <label for="message" class="form-label text-primary">Votre message</label>
