@@ -11,7 +11,7 @@
 
 							{% if category1.parent is not null and category1.parent.id == category.id  and category1.isActive %}
 								<li>
-									<a class="dropdown-item text-secondary" href={{ path('univers',{'id':category1.id})}}>
+									<a class="dropdown-item text-secondary" href={{ path('univers',{'id':category1.id} )}}>
 										{{category1.name |title}}
 									</a>
 								</li>
@@ -21,6 +21,19 @@
 				</li>
 			{% endif %}
 		{% endfor %}
+
+		{% for message in app.flashes('mailSuccess') %}
+		<li class="nav-item px-2 m-0 m-xl-5 m-md-2">	
+				<span class="nav-link text-primary">{{ message }}</span>
+		</li>				
+		{% endfor %}
+
+		{% for message in app.flashes('mailFail') %}
+		<li class="nav-item px-2 m-0 m-xl-5 m-md-2">	
+				<span class="nav-link text-danger">{{ message }}</span>
+		</li>				
+		{% endfor %}
+
 
 		{% if is_granted('ROLE_EMPLOYEE') %}
 			<li class="nav-item px-2 m-0 m-xl-5 m-md-2">
