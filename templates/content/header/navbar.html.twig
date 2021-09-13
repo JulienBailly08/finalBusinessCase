@@ -7,7 +7,8 @@
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
-			{{ render(path('menu')) }}
+			
+			{{ render(controller('App\\Controller\\MenuController::index')) }}
 
 			<div class=" justify-content-center d-none d-md-inline-flex">
 				<a class=" px-2 px-lg-3 order-2" href="{{path('basket')}}"><img src="{{ asset('img/panier.png')}}"/></a>

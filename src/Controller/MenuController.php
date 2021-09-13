@@ -11,7 +11,7 @@ use App\Repository\CategoryRepository;
 
 class MenuController extends AbstractController
 {
-    #[Route('/menu', name: 'menu')]
+
     public function index(CategoryRepository $categoryRepository): Response
     {
         return $this->render('content/header/menu.html.twig', [
