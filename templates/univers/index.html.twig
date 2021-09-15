@@ -12,15 +12,16 @@
 		<div class="row ps-5 pb-5">
 			<div class="col-12 col-md-3 col-xl-2 py-5 px-4 rounded bg-secondary tailleSticky sticky-top">
 
-				<form class="sticky-top">
+				<div class="sticky-top">
 					<div class="col">
 						<div class="p-1 bg-white rounded d-flex flex-row flex-md-column row row-cols-3 row-cols-md-1">
 							<a href="" class=" col text-center d-block  pt-1 pt-md-3  mb-2 mb-md-4 mt-2 mt-md-0">Trier par prix</a>
 							<a href="" class=" col text-center d-block  pt-1  mb-2 mb-md-4 mt-2 mt-md-0">Trier par marque</a>
 							<a href="" class=" col text-center d-block  pt-1  mb-2 mb-md-4 mt-2 mt-md-0">Trier par autre</a>
+							{{ render(controller('App\\Controller\\SearchController::searchBar')) }}
 						</div>
 					</div>
-				</form>
+				</div>
 
 			</div>
 			<div class=" col-12 col-md-9 col-xl-10 px-4">
@@ -65,7 +66,7 @@
 							{% for arrayId in arrayIds %}
 								{% for categorySon in categorySons %}
 									{% for product in categorySon.products %}
-										{% if product.id == arrayId %}
+										{% if product.id == arrayId and product.isactive == 1 %}
 											<div class="col tailleCardUnivers">
 												<div class="bg-white p-4 rounded-2 d-flex flex-column align-items-center">
 													<div>
@@ -91,25 +92,26 @@
 
 						{% else %}
 							{% for product in products %}
-
-								<div class="col tailleCardUnivers">
-									<div class="bg-white p-4 rounded-2 d-flex flex-column align-items-center">
-										<div>
-											<h3 class="text-center text-dark text-uppercase h6 mt-2 mb-3">{{product.title}}</h3>
-										</div>
-										<div class="tailleImgUnivers">
-											<a href="{{ path('product_front',{'id':product.id})}}"><img src="{{ asset('upload/'~ product.picture1)}}" class="img-fluid h-100"></a>
-										</div>
-										<div class="align-self-end">
-											<p class="text-end text-light">
-												{{product.price |number_format(2) }}
-												€ HT</p>
-											<p class="text-end text-primary">
-												{{ (product.price*product.tvaRate.rate) |number_format(2) }}
-												€ TTC</p>
+								{% if product.isactive == 1 %}
+									<div class="col tailleCardUnivers">
+										<div class="bg-white p-4 rounded-2 d-flex flex-column align-items-center">
+											<div>
+												<h3 class="text-center text-dark text-uppercase h6 mt-2 mb-3">{{product.title}}</h3>
+											</div>
+											<div class="tailleImgUnivers">
+												<a href="{{ path('product_front',{'id':product.id})}}"><img src="{{ asset('upload/'~ product.picture1)}}" class="img-fluid h-100"></a>
+											</div>
+											<div class="align-self-end">
+												<p class="text-end text-light">
+													{{product.price |number_format(2) }}
+													€ HT</p>
+												<p class="text-end text-primary">
+													{{ (product.price*product.tvaRate.rate) |number_format(2) }}
+													€ TTC</p>
+											</div>
 										</div>
 									</div>
-								</div>
+								{% endif %}
 							{% endfor %}
 						{% endif %}
 

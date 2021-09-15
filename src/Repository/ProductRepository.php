@@ -49,6 +49,30 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findArticlesByName(string $query)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+            ->where(
+                $qb->expr()->andX(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('p.title', ':query'),
+                        $qb->expr()->like('p.description', ':query'),
+                    ),
+                )
+            )          
+            ->setParameter('query', '%' . $query . '%')
+            ->andWhere('p.isActive = 1')
+        ;
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+
+
+
+
     // /**
     //  * @return Product[] Returns an array of Product objects
     //  */

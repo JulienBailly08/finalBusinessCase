@@ -13,7 +13,7 @@
 			<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-3 gy-md-4 gx-md-4 mb-4">
 				{% for value in shuffleArray %}
 					{% for phare in phares %}
-						{% if phare.id == value %}
+						{% if phare.id == value and phare.isactive == 1 %}
 
 							<div class="col zoom">
 								<div class="bg-secondary d-flex flex-column p-3 rounded-2">
