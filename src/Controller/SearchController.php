@@ -26,7 +26,7 @@ class SearchController extends AbstractController
     public function searchBar()
     {
         $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl('handleSearch'))
+            ->setAction($this->generateUrl('searchResults'))
             ->add('query', TextType::class, [
                 'label' => false,
                 'attr' => [
@@ -46,17 +46,17 @@ class SearchController extends AbstractController
     }
     
     /**
-     * @Route("/handleSearch", name="handleSearch")
+     * @Route("/results", name="searchResults")
      * @param Request $request
      */
     public function handleSearch(Request $request, ProductRepository $repo)
     {
         $query = $request->request->get('form')['query'];
         if($query) {
-            $articles = $repo->findArticlesByName($query);
+            $products = $repo->findProductByName($query);
         }
         return $this->render('search/index.html.twig', [
-            'articles' => $articles
+            'products' => $products
         ]);
     }
 }

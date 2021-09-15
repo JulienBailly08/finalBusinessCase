@@ -49,7 +49,7 @@ class ProductRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findArticlesByName(string $query)
+    public function findProductByName(string $query)
     {
         $qb = $this->createQueryBuilder('p');
         $qb
