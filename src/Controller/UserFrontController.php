@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
-use App\Form\UserTypeFront;
-use App\Form\AdressType;
 use App\Entity\Adress;
+use App\Form\AdressType;
+use App\Form\UserTypeFront;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class UserFrontController extends AbstractController
@@ -42,7 +43,7 @@ class UserFrontController extends AbstractController
     }
 
     #[Route('/userAdress/edit', name: 'user_front-adress_edit')]
-    public function adressEdition(Request $request): Response
+    public function adressEdition(Request $request, SessionInterface $session): Response
     {
         $user = $this->getUser();
         $adresses = new Adress;
@@ -57,6 +58,10 @@ class UserFrontController extends AbstractController
         
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            if($session->get('basket')):
+                return $this->redirectToRoute('order');
+            endif;
 
             return $this->redirectToRoute('user', [], Response::HTTP_SEE_OTHER);
         }

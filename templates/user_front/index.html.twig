@@ -54,6 +54,10 @@
 
 			{% for adress in adresses %}
 
+				<div class="col-12">
+					<h3 class="text-warning my-4">{{adress.adressName}}</h3>
+				</div>
+
 				<div class="col-sm-3">
 					<label for="number" class="form-label text-primary">Numéro</label>
 					<input disabled type="text" class="form-control" id="number" placeholder="{{adress.number}}">
