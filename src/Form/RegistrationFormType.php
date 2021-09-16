@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
-use App\Form\AdressType;
+use App\Form\AdressTypeRegister;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -41,7 +41,7 @@ class RegistrationFormType extends AbstractType
                 ]
             ])
 
-            ->add('adress', AdressType::class,[
+            ->add('adress', AdressTypeRegister::class,[
                 'mapped' => false,
             ])
 
