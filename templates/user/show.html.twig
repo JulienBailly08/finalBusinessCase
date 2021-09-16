@@ -50,45 +50,50 @@
 			</table>
 			<div class="d-flex">
 				<h2 class="text-white">Adresse du Client</h2>
-				
+
 			</div>
 
 			{% for item in adress %}
-                <a  href={{path('user_adress_edit',{'id':user.id})}}>
+				<a href={{path('user_adress_edit',{'id':user.id} )}}>
 					<button class="btn btn-primary">Modification de l'adresse</button>
 				</a>
-					<table class="table">
-						<tbody>
-							<tr>
-								<th class="text-secondary">N°</th>
-								<td class="text-white">{{ item.number }}</td>
-							</tr>
-							<tr>
-								<th class="text-secondary">Type de voie</th>
-								<td class="text-white">{{ item.type }}</td>
-							</tr>
-							<tr>
-								<th class="text-secondary">nom de voie</th>
-								<td class="text-white">{{ item.name }}</td>
-							</tr>
-							<tr>
-								<th class="text-secondary">Code postal</th>
-								<td class="text-white">{{ item.postalCode}}</td>
-							</tr>
-							<tr>
-								<th class="text-secondary">Ville</th>
-								<td class="text-white">{{ item.city}}</td>
-							</tr>
-							<tr>
-								<th class="text-secondary">Pays</th>
-								<td class="text-white">{{ item.country}}</td>
-							</tr>
+				<table class="table">
+					<tbody>
+						<tr>
+							<th class=" h4 text-secondary">Nom de l'addresse</th>
+							<td class=" h4 text-white">{{ item.adressName }}</td>
+						</tr>
 
-						</tbody>
-					</table>
-				{% else %}
-					<p class="text-white">Ce client ne possède pas d'adresse enregistrée</p>
-                    <a class="ms-5" href={{path('user_adress_new',{'id':user.id})}}>
+						<tr>
+							<th class="text-secondary">N°</th>
+							<td class="text-white">{{ item.number }}</td>
+						</tr>
+						<tr>
+							<th class="text-secondary">Type de voie</th>
+							<td class="text-white">{{ item.type }}</td>
+						</tr>
+						<tr>
+							<th class="text-secondary">nom de voie</th>
+							<td class="text-white">{{ item.name }}</td>
+						</tr>
+						<tr>
+							<th class="text-secondary">Code postal</th>
+							<td class="text-white">{{ item.postalCode}}</td>
+						</tr>
+						<tr>
+							<th class="text-secondary">Ville</th>
+							<td class="text-white">{{ item.city}}</td>
+						</tr>
+						<tr>
+							<th class="text-secondary">Pays</th>
+							<td class="text-white">{{ item.country}}</td>
+						</tr>
+
+					</tbody>
+				</table>
+			{% else %}
+				<p class="text-white">Ce client ne possède pas d'adresse enregistrée</p>
+				<a class="ms-5" href={{path('user_adress_new',{'id':user.id} )}}>
 					<button class="btn btn-primary">Ajouter une adresse</button>
 				</a>
 			{% endfor %}
