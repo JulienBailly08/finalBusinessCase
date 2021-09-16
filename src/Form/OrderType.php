@@ -12,10 +12,11 @@ class OrderType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+      
         $user = $options['user'];
         $builder
             ->add('adresses', EntityType::class,[
-                'label'=>'Choisissez votre adresse de livraison',
+                'label'=>'Confirmer votre adresse de livraison',
                 'required'=> true,
                 'class'=> Adress::class,
                 'choices'=>$user->getAdresses(),
