@@ -6,29 +6,24 @@
 
 {% block body %}
 	<div class="container">
-		<h2 class="text-center">Finalisation de ma commande</h2>
-		<p class="mt-4">Choisissez vos préferences avant de passer votre commande</p>
+		<h2 class="text-center">Confirmation des options de commande</h2>
+		
         <hr>
         <div class="row">
             <div class="col-md-6">
-
 
             {{ form_start(form) }}
 
             {{ form_row(form.adresses, {label: 'Confirmer votre adresse :' })|replace({'[br]': '<br>'})| raw }}
               <a class="btn btn-primary" href="{{path('user_front-adress_edit')}}">Modifier l'adresse</a>
-
             
             {{ form_row(form.shipment, {label: 'Choisissez votre mode de livraison' }) }}
-                                
-            
+            {{ form_row(form.payment, {label: 'Choisissez votre moyen de paiement' }) }}
+                                           
             <button class="btn btn-primary">{{ button_label|default('Valider la commande') }}</button>
             
             {{ form_end(form) }}
-
-
-
-              
+             
             </div>
 
             <div class="col-md-6">

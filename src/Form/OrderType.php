@@ -3,10 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Adress;
+use App\Entity\Payment;
 use App\Entity\Shipment;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,6 +31,14 @@ class OrderType extends AbstractType
                 'required' => true,
                 'class' => Adress::class,
                 'choices' => $user->getAdresses(),
+                'multiple' => false,
+                'expanded' => true
+            ])
+            ->add('payment', EntityType::class, [
+                'label' => 'Choisissez votre mode de livraison',
+                'required' => true,
+                'class' => Payment::class,
+                'choice_label' => 'name',
                 'multiple' => false,
                 'expanded' => true
             ]);

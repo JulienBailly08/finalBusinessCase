@@ -1,0 +1,43 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}- Paiement
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			<h1 class="text-center text-white">Moyens de paiement existants</h1>
+
+			<a href="{{ path('payment_new') }}">
+				<button class="btn btn-primary">Ajout d'un nouveau Moyen</button>
+			</a>
+
+			<table class="table">
+				<thead class="text-secondary">
+					<tr>
+						<th>Nom</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody class="text-white">
+					{% for payment in payments %}
+						<tr>
+							<td>{{ payment.name }}</td>
+							<td>
+								<a href="{{ path('payment_edit', {'id': payment.id}) }}">
+									<button class="btn btn-primary">Modifier</button>
+								</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="10">Aucune valeur référencée</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{% endblock %}

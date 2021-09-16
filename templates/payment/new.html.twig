@@ -1,0 +1,17 @@
+{% extends 'baseback.html.twig' %}
+
+{% block title %} - Paiement{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center text-white">Création d'un nouveau moyen de paiement</h1>
+	<div class="container">
+		<div class="col-6">
+		 {{ include('payment/_form.html.twig') }}
+		</div>
+		<a href="{{ path('payment_index') }}">
+			<button class="btn btn-warning">Retour</button>
+		</a>
+	</div>
+
+{% endblock %}

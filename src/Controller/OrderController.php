@@ -43,6 +43,10 @@ class OrderController extends AbstractController
             'user'=>$this->getUser(),
         ]);
 
+        if($form->isSubmitted() && $form->isValid()):
+        
+        endif;
+
         return $this->render('order/index.html.twig', [
             'form'=> $form->createView(),
             'items' => $basketFull,
