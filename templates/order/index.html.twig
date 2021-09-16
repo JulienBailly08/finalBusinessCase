@@ -35,29 +35,16 @@
                 {% for item in items %}
                 <div class="row">
                 <div class="col-2"><img src="{{ asset('upload/'~ item.product.picture1)}}" alt="{{item.product.title}}" height="75px"></div>
-                 <div class="col-8 my-auto">{{item.product.title}}</div>
+                <div class="col-8 my-auto">{{item.product.title}}</div>
                 <div class="col-2 my-auto"> x {{item.quantity}}</div>
                 </div>
-
-
-
-						<tr>
-							<td>
-								{{item.product.title}}
-							</td>
-							<td>{{item.product.price |number_format(2)}}
-								</td>
-							<td>{{ (item.product.price*item.product.tvaRate.rate) |number_format(2) }}
-								</td>
-							<td>{{item.quantity}}</td>
-							<td>{{(item.product.price*item.quantity) |number_format(2)}}
-								</td>
-							<td>{{(item.product.price*item.product.tvaRate.rate*item.quantity) |number_format(2) }}
-								</td>
-		
-						</tr>
-					{% endfor %}
-                <b>Bouton pour payer</b>        
+				{% endfor %}
+                <hr>
+                <div class="row">
+                <div class="col-6">Prix total</div>
+                <div class="col-3 text-end my-auto">{{totalHT|number_format(2)}}€ HT</div>
+                <div class="col-3 text-end my-auto">{{totalTTC|number_format(2)}}€ TTC</div>
+                </div>                   
             </div>       
         </div>
 	</div>
