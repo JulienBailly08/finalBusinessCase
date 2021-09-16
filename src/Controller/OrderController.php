@@ -9,11 +9,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AbstractController
 {
     #[Route('/commande', name: 'order')]
-    public function index(SessionInterface $session, ProductRepository $productRepository): Response
+    public function index(SessionInterface $session, ProductRepository $productRepository, Request $request): Response
     {
         $basket = $session->get('basket', []);
        
@@ -43,8 +44,9 @@ class OrderController extends AbstractController
             'user'=>$this->getUser(),
         ]);
 
+        $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()):
-        
+            dd($form->getData());
         endif;
 
         return $this->render('order/index.html.twig', [
