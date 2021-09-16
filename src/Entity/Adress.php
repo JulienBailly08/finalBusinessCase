@@ -53,6 +53,17 @@ class Adress
      */
     private $idUser;
 
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $adressName;
+
+
+    public function __toString()
+    {
+        return $this->getAdressName().'[br]'.$this->getNumber().' '.$this->getType().' '.$this->getName().'[br]'.$this->getCity().' - '.$this->getCountry();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -138,6 +149,18 @@ class Adress
     public function setIdUser(?User $idUser): self
     {
         $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getAdressName(): ?string
+    {
+        return $this->adressName;
+    }
+
+    public function setAdressName(string $adressName): self
+    {
+        $this->adressName = $adressName;
 
         return $this;
     }

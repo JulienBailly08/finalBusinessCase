@@ -53,6 +53,7 @@ class RegistrationController extends AbstractController
             $adresse->setPostalCode($form->get('adress')->get('postalCode')->getData());
             $adresse->setCity($form->get('adress')->get('city')->getData());
             $adresse->setCountry($form->get('adress')->get('country')->getData());
+            $adresse->setAdressName('défaut');
                       
             $entityManager->persist($user);
                      
