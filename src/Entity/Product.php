@@ -71,10 +71,6 @@ class Product
      */
     private $category;
 
-    /**
-     * @ORM\OneToMany(targetEntity=QuantityOnCommand::class, mappedBy="product")
-     */
-    private $quantityOnCommands;
 
     /**
      * @ORM\ManyToOne(targetEntity=Brand::class, inversedBy="products")
@@ -84,7 +80,7 @@ class Product
 
     public function __construct()
     {
-        $this->quantityOnCommands = new ArrayCollection();
+        
     }
 
     public function getId(): ?int
@@ -208,36 +204,6 @@ class Product
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|QuantityOnCommand[]
-     */
-    public function getQuantityOnCommands(): Collection
-    {
-        return $this->quantityOnCommands;
-    }
-
-    public function addQuantityOnCommand(QuantityOnCommand $quantityOnCommand): self
-    {
-        if (!$this->quantityOnCommands->contains($quantityOnCommand)) {
-            $this->quantityOnCommands[] = $quantityOnCommand;
-            $quantityOnCommand->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeQuantityOnCommand(QuantityOnCommand $quantityOnCommand): self
-    {
-        if ($this->quantityOnCommands->removeElement($quantityOnCommand)) {
-            // set the owning side to null (unless already changed)
-            if ($quantityOnCommand->getProduct() === $this) {
-                $quantityOnCommand->setProduct(null);
-            }
-        }
 
         return $this;
     }
