@@ -6,6 +6,7 @@ use App\Entity\Adress;
 use App\Entity\Shipment;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -32,6 +33,12 @@ class OrderType extends AbstractType
                 'choices' => $user->getAdresses(),
                 'multiple' => false,
                 'expanded' => true
+            ])
+            ->add('submit',SubmitType::class, [
+                'label'=>'Valider la commande',
+                'attr'=>[
+                    'class'=>'btn-success btn-block'
+                ]
             ]);
     }
 

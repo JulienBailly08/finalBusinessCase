@@ -15,6 +15,7 @@ class BasketController extends AbstractController
     {
         
         $basket = $session->get('basket', []);
+       
         $basketFull=[];
 
         foreach ($basket as $id => $quantity) {

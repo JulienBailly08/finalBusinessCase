@@ -4,22 +4,50 @@ namespace App\Controller;
 
 
 use App\Form\OrderType;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class OrderController extends AbstractController
 {
     #[Route('/commande', name: 'order')]
-    public function index(): Response
+    public function index(SessionInterface $session, ProductRepository $productRepository): Response
     {
-         
+        $basket = $session->get('basket', []);
+       
+        $basketFull=[];
+
+        foreach ($basket as $id => $quantity) {
+            $basketFull[] = [
+                'product' => $productRepository->find($id),
+                'quantity' => $quantity
+            ];
+        }
+        $totalHT = 0;
+        $totalTTC = 0;
+
+        foreach ($basketFull as $item) {
+            $totalItem = $item['product']->getPrice()*$item['quantity'];
+            $totalHT+= $totalItem;
+        }
+        foreach ($basketFull as $item) {
+            
+            $totalItem = $item['product']->getPrice()*$item['product']->getTvaRate()->getRate()*$item['quantity'];
+            $totalTTC+= $totalItem;
+        }      
+        
+        
         $form = $this->createForm( OrderType::class, null,[
             'user'=>$this->getUser(),
         ]);
 
         return $this->render('order/index.html.twig', [
             'form'=> $form->createView(),
+            'items' => $basketFull,
+            'totalHT' => $totalHT,
+            'totalTTC' => $totalTTC
             
         ]);
     }
