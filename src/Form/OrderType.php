@@ -33,13 +33,8 @@ class OrderType extends AbstractType
                 'choices' => $user->getAdresses(),
                 'multiple' => false,
                 'expanded' => true
-            ])
-            ->add('submit',SubmitType::class, [
-                'label'=>'Valider la commande',
-                'attr'=>[
-                    'class'=>'btn-success btn-block'
-                ]
             ]);
+  
     }
 
     public function configureOptions(OptionsResolver $resolver)

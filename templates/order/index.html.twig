@@ -11,12 +11,24 @@
         <hr>
         <div class="row">
             <div class="col-md-6">
-                {% set formHtml %}
-                    {{ form(form) }}
-                {% endset %}
 
-                {{ formHtml|replace({'[br]': '<br>'})| raw }}
-                <a class="btn btn-primary" href="{{path('user_front-adress_edit')}}">Modifier l'adresse</a>
+
+            {{ form_start(form) }}
+
+            {{ form_row(form.adresses, {label: 'Confirmer votre adresse :' })|replace({'[br]': '<br>'})| raw }}
+              <a class="btn btn-primary" href="{{path('user_front-adress_edit')}}">Modifier l'adresse</a>
+
+            
+            {{ form_row(form.shipment, {label: 'Choisissez votre mode de livraison' }) }}
+                                
+            
+            <button class="btn btn-primary">{{ button_label|default('Valider la commande') }}</button>
+            
+            {{ form_end(form) }}
+
+
+
+              
             </div>
 
             <div class="col-md-6">
