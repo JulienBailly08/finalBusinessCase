@@ -1,0 +1,16 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %} - Expedition{% endblock %}
+
+{% block body %}
+<h1 class="text-center text-white">Création d'un nouveau mode d'acheminement</h1>
+	<div class="container">
+		<div class="col-6">
+		 {{ include('shipment/_form.html.twig') }}
+		</div>
+		<a href="{{ path('shipment_index') }}">
+			<button class="btn btn-warning">Retour</button>
+		</a>
+	</div>
+ 
+{% endblock %}

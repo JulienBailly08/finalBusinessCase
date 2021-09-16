@@ -1,0 +1,47 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}- Expedition
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<div class="row">
+			<h1 class="text-center text-white">Moyens d'expédition existants</h1>
+
+			<a href="{{ path('shipment_new') }}">
+				<button class="btn btn-primary">Ajout d'un nouveau Moyen</button>
+			</a>
+
+			<table class="table">
+				<thead class="text-secondary">
+					<tr>
+						<th>Nom</th>
+						<th>Description</th>
+						<th class="text-center">Coût</th>
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody class="text-white">
+					{% for shipment in shipments %}
+						<tr>
+							<td>{{ shipment.name }}</td>
+							<td>{{ shipment.description }}</td>
+							<td class="text-center">{{ shipment.price }}</td>
+							<td>
+								<a href="{{ path('shipment_edit', {'id': shipment.id}) }}">
+									<button class="btn btn-primary">Modifier</button>
+								</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="10">Aucune valeur référencée</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+{% endblock %}
