@@ -48,6 +48,12 @@ class OrderDetails
      */
     private $total;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="orderDetails")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -121,6 +127,18 @@ class OrderDetails
     public function setTotal(float $total): self
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

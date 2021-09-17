@@ -36,12 +36,7 @@ class Order
      */
     private $shipment;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Status::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $status;
-
+   
     /**
      * @ORM\Column(type="float")
      */
@@ -109,18 +104,6 @@ class Order
     public function setShipment(string $shipment): self
     {
         $this->shipment = $shipment;
-
-        return $this;
-    }
-
-    public function getStatus(): ?Status
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?Status $status): self
-    {
-        $this->status = $status;
 
         return $this;
     }

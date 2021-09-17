@@ -24,6 +24,16 @@ class Status
      */
     private $information;
 
+    /**
+     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="status")
+     */
+    private $orderDetails;
+
+    public function __construct()
+    {
+        $this->orderDetails = new ArrayCollection();
+    }
+
 
     public function getId(): ?int
     {
@@ -38,6 +48,36 @@ class Status
     public function setInformation(string $information): self
     {
         $this->information = $information;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|OrderDetails[]
+     */
+    public function getOrderDetails(): Collection
+    {
+        return $this->orderDetails;
+    }
+
+    public function addOrderDetail(OrderDetails $orderDetail): self
+    {
+        if (!$this->orderDetails->contains($orderDetail)) {
+            $this->orderDetails[] = $orderDetail;
+            $orderDetail->setStatus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOrderDetail(OrderDetails $orderDetail): self
+    {
+        if ($this->orderDetails->removeElement($orderDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($orderDetail->getStatus() === $this) {
+                $orderDetail->setStatus(null);
+            }
+        }
 
         return $this;
     }

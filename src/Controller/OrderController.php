@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Order;
+use App\Entity\OrderDetails;
 use App\Form\OrderType;
 use App\Repository\ProductRepository;
 use DateTime;
@@ -90,7 +91,12 @@ class OrderController extends AbstractController
             $shipment = $form->get('shipment')->getData();
             $payment = $form->get('payment')->getData();
             $deliveryAdress = $form->get('adresses')->getData();
-           
+            $user = $this->getUser();
+            $deliveryContent = $user->getFirstName().' '.$user->getLastname().'<br>'
+            .$deliveryAdress->getNumber().' '.$deliveryAdress->getType().' '.$deliveryAdress->getName().'<br>'
+            .$deliveryAdress->getPostalCode().' '.$deliveryAdress->getCity().'<br'
+            .$deliveryAdress->getCountry();
+                     
 
             
             //enregistrement commande
@@ -102,14 +108,24 @@ class OrderController extends AbstractController
             $order->setPaymentChoice($payment->getName());
             $order->setIsPaid(0);
             
-
             if($shipment->getName() == 'Click and Collect'):
-                $order->setDelivery('Lanimesalerie');
+                $order->setDelivery($user->getFirstName().' '.$user->getLastname().'<br>Lanimesalerie');
             else :
-                $order->setDelivery($deliveryAdress->getAdressName());   
+                $order->setDelivery($deliveryContent);   
             endif;
             
-            dd($order);
+            
+ 
+            foreach ($basketFull as $item) :
+                $orderDetails = new OrderDetails();
+                $orderDetails->setMyOrder($order);
+                $orderDetails->setProduct($item['product']->getTitle());
+                $orderDetails->setQuantity($item['quantity']);
+                $orderDetails->setTva($item['product']->getTvaRate()->getRate());
+                $orderDetails->setPrice($item['product']->getPrice());
+                $orderDetails->setTotal(($item['product']->getTvaRate()->getRate())*($item['product']->getPrice()));
+                dd($orderDetails, $item);
+            endforeach;
 
             //renregistrer produits
         endif;
