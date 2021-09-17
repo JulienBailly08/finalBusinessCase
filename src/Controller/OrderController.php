@@ -124,7 +124,7 @@ class OrderController extends AbstractController
             $order->setStatus($status);
             
             if($shipment->getName() == 'Click and Collect'):
-                $order->setDelivery($user->getFirstName().' '.$user->getLastname().'<br>Lanimesalerie');
+                $order->setDelivery($user->getFirstName().' '.$user->getLastname().'<br>La Nimes\'alerie');
             else :
                 $order->setDelivery($deliveryContent);   
             endif;
@@ -148,18 +148,19 @@ class OrderController extends AbstractController
                 $this->entityManager->persist($orderDetails);  
             endforeach;
 
-            //$this->entityManager->flush();  
+            //$this->entityManager->flush(); 
+
+            return $this->render('order/add.html.twig', [          
+                'items' => $basketFull,
+                'totalHT' => $totalHT,
+                'totalTTC' => $totalTTC,
+                'adress'=> $adressFront,
+                'shipping'=> $shipment,
+                     
+            ]);
  
         endif;
-
-        return $this->render('order/add.html.twig', [          
-            'items' => $basketFull,
-            'totalHT' => $totalHT,
-            'totalTTC' => $totalTTC,
-            'adress'=> $adressFront,
-            'shipping'=> $shipment,
-                 
-        ]);
+     return $this->redirectToRoute('basket');   
     }
 
 }

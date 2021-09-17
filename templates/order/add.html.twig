@@ -15,10 +15,10 @@
 			
                     <strong>Adresse de Livraison :</strong>
 						<p class="m-4">{{adress|raw}}</p>
-                        <hr>	
+                
 				
                     <strong>Service choisi</strong>
-						<p class="m-4">{{shipping.name}}</p>
+						<p class="m-4">{{shipping.name}} :<br> {{shipping.description}}</p>
 	
 		
 
@@ -62,7 +62,7 @@
 				</div>
 
 
-				<a href="" class="mt-4 align-self-end btn btn-primary">Payer</a>
+				<a href="" class="mt-4 align-self-end btn btn-primary">Payer {{(totalTTC + shipping.price)|number_format(2)}} € TTC</a>
 			</div>
 		</div>
 	</div>
