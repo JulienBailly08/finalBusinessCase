@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Order;
-use App\Entity\Status;
 use App\Form\OrderType;
 use App\Repository\ProductRepository;
 use DateTime;
@@ -90,8 +89,9 @@ class OrderController extends AbstractController
             $date = new DateTime();
             $shipment = $form->get('shipment')->getData();
             $payment = $form->get('payment')->getData();
-            $status = $form->get('status')->getData();
-            dd($status);
+            $deliveryAdress = $form->get('adresses')->getData();
+           
+
             
             //enregistrement commande
             $order = new Order();
@@ -101,7 +101,14 @@ class OrderController extends AbstractController
             $order->setShipmentPrice($shipment->getPrice());
             $order->setPaymentChoice($payment->getName());
             $order->setIsPaid(0);
-            $order->setStatus($status);
+            
+
+            if($shipment->getName() == 'Click and Collect'):
+                $order->setDelivery('Lanimesalerie');
+            else :
+                $order->setDelivery($deliveryAdress->getAdressName());   
+            endif;
+            
             dd($order);
 
             //renregistrer produits
