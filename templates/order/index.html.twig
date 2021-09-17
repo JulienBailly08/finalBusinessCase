@@ -31,14 +31,14 @@
                 <div class="row">
                 <div class="col-2"><img src="{{ asset('upload/'~ item.product.picture1)}}" alt="{{item.product.title}}" height="75px"></div>
                 <div class="col-8 my-auto">{{item.product.title}}</div>
-                <div class="col-2 my-auto"> x {{item.quantity}}</div>
+                <div class="col-2 my-auto text-end"> x {{item.quantity}}</div>
                 </div>
 				{% endfor %}
                 <hr>
                 <div class="row">
                 <div class="col-6">Prix total</div>
-                <div class="col-3 text-end my-auto">{{totalHT|number_format(2)}}€ HT</div>
-                <div class="col-3 text-end my-auto">{{totalTTC|number_format(2)}}€ TTC</div>
+                <div class="col-3 text-end my-auto">{{totalHT|number_format(2)}} € HT</div>
+                <div class="col-3 text-end my-auto">{{totalTTC|number_format(2)}} € TTC</div>
                 </div>                   
             </div>       
         </div>

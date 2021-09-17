@@ -2,21 +2,32 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Order;
-use App\Entity\OrderDetails;
 use App\Entity\Status;
 use App\Form\OrderType;
-use App\Repository\ProductRepository;
+use App\Entity\OrderDetails;
 use App\Repository\StatusRepository;
-use DateTime;
+use App\Repository\ProductRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
 
 class OrderController extends AbstractController
 {
+    
+    private $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager=$entityManager;
+    }
+    
+    
+    
     #[Route('/commande', name: 'order')]
     public function index(SessionInterface $session, ProductRepository $productRepository, Request $request): Response
     {
@@ -102,6 +113,7 @@ class OrderController extends AbstractController
             $status = $statusRepo->findOneBy(['id'=>'6']);
                      
             //enregistrement commande
+
             $order = new Order();
             $order->setUser(($this->getUser()));
             $order->setCreatedAt($date);
@@ -117,7 +129,13 @@ class OrderController extends AbstractController
                 $order->setDelivery($deliveryContent);   
             endif;
             
+           
 
+            $this->entityManager->persist($order);
+            $adressFront = $order->getDelivery();
+ 
+            
+            //detail de la commande
  
             foreach ($basketFull as $item) :
                 $orderDetails = new OrderDetails();
@@ -126,18 +144,21 @@ class OrderController extends AbstractController
                 $orderDetails->setQuantity($item['quantity']);
                 $orderDetails->setTva($item['product']->getTvaRate()->getRate());
                 $orderDetails->setPrice($item['product']->getPrice());
-                $orderDetails->setTotal(($item['product']->getTvaRate()->getRate())*($item['product']->getPrice()));
-                dd($orderDetails, $item);
+                $orderDetails->setTotal(($item['product']->getTvaRate()->getRate())*($item['product']->getPrice())*$item['quantity']);
+                $this->entityManager->persist($orderDetails);  
             endforeach;
 
-            //renregistrer produits
+            //$this->entityManager->flush();  
+ 
         endif;
 
         return $this->render('order/add.html.twig', [          
             'items' => $basketFull,
             'totalHT' => $totalHT,
-            'totalTTC' => $totalTTC
-            
+            'totalTTC' => $totalTTC,
+            'adress'=> $adressFront,
+            'shipping'=> $shipment,
+                 
         ]);
     }
 

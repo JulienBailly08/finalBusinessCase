@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Commande
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<h2 class="text-center">Récapitulatif de la commande</h2>
+
+		<hr>
+		<div class="row">
+			<div class="col-md-6">
+				
+			
+                    <strong>Adresse de Livraison :</strong>
+						<p class="m-4">{{adress|raw}}</p>
+                        <hr>	
+				
+                    <strong>Service choisi</strong>
+						<p class="m-4">{{shipping.name}}</p>
+	
+		
+
+			</div>
+
+			<div class="col-md-6 d-flex flex-column">
+				{% for item in items %}
+					<div class="row">
+						<div class="col-2"><img src="{{ asset('upload/'~ item.product.picture1)}}" alt="{{item.product.title}}" height="75px"></div>
+						<div class="col-4 text-end mr-3 my-auto">
+							<span class="text-small">Prix Unitaire</span>
+							{{(item.product.price * item.product.tvaRate.rate)|number_format(2)}}
+							€ TTC</div>
+						<div class="col-3 text-end mr-3 my-auto">Quantité :
+							{{item.quantity}}</div>
+						<div class="text-end col-3 my-auto">
+							{{(item.product.price * item.product.tvaRate.rate * item.quantity)|number_format(2)}}
+							€ TTC</div>
+					</div>
+				{% endfor %}
+				<hr>
+				<div class="row">
+					<div class="col-6">Sous total</div>
+					<div class="col-3 text-end my-auto">{{totalHT|number_format(2)}}
+						€ HT</div>
+					<div class="col-3 text-end my-auto">{{totalTTC|number_format(2)}}
+						€ TTC</div>
+				</div>
+				<div class="row">
+					<div class="col-6">Coût de livraison</div>
+					<div class="col-3 text-end my-auto"></div>
+					<div class="col-3 text-end my-auto">{{shipping.price|number_format(2)}}
+						€ TTC</div>
+				</div>
+				<hr>
+				<div class="row">
+					<div class="col-6">Total à payer</div>
+					<div class="col-3 text-end my-auto"></div>
+					<div class="col-3 text-end my-auto">{{(totalTTC + shipping.price)|number_format(2)}}
+						€ TTC</div>
+				</div>
+
+
+				<a href="" class="mt-4 align-self-end btn btn-primary">Payer</a>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}
