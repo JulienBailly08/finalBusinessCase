@@ -62,6 +62,12 @@ class Order
      */
     private $isPaid;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="orders")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $status;
+
     public function __construct()
     {
         $this->orderDetails = new ArrayCollection();
@@ -182,6 +188,18 @@ class Order
     public function setIsPaid(bool $isPaid): self
     {
         $this->isPaid = $isPaid;
+
+        return $this;
+    }
+
+    public function getStatus(): ?Status
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?Status $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }

@@ -48,11 +48,6 @@ class OrderDetails
      */
     private $total;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Status::class, inversedBy="orderDetails")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $status;
 
     public function getId(): ?int
     {
@@ -131,15 +126,4 @@ class OrderDetails
         return $this;
     }
 
-    public function getStatus(): ?Status
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?Status $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
 }

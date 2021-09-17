@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Adress;
 use App\Entity\Payment;
 use App\Entity\Shipment;
+use App\Entity\Status;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,6 +35,7 @@ class OrderType extends AbstractType
                 'multiple' => false,
                 'expanded' => true
             ])
+
             ->add('payment', EntityType::class, [
                 'label' => 'Choisissez votre mode de livraison',
                 'required' => true,
@@ -48,7 +50,7 @@ class OrderType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'user' => array(),
+            'user' => array()
         ]);
     }
 }

@@ -4,8 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Order;
 use App\Entity\OrderDetails;
+use App\Entity\Status;
 use App\Form\OrderType;
 use App\Repository\ProductRepository;
+use App\Repository\StatusRepository;
 use DateTime;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,7 +58,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/commande/recap', name: 'order_recap')]
-    public function add(SessionInterface $session, ProductRepository $productRepository, Request $request): Response
+    public function add(SessionInterface $session, ProductRepository $productRepository, Request $request, StatusRepository $statusRepo): Response
     {
         $basket = $session->get('basket', []);
        
@@ -96,9 +98,9 @@ class OrderController extends AbstractController
             .$deliveryAdress->getNumber().' '.$deliveryAdress->getType().' '.$deliveryAdress->getName().'<br>'
             .$deliveryAdress->getPostalCode().' '.$deliveryAdress->getCity().'<br'
             .$deliveryAdress->getCountry();
+          
+            $status = $statusRepo->findOneBy(['id'=>'6']);
                      
-
-            
             //enregistrement commande
             $order = new Order();
             $order->setUser(($this->getUser()));
@@ -107,6 +109,7 @@ class OrderController extends AbstractController
             $order->setShipmentPrice($shipment->getPrice());
             $order->setPaymentChoice($payment->getName());
             $order->setIsPaid(0);
+            $order->setStatus($status);
             
             if($shipment->getName() == 'Click and Collect'):
                 $order->setDelivery($user->getFirstName().' '.$user->getLastname().'<br>Lanimesalerie');
@@ -114,7 +117,7 @@ class OrderController extends AbstractController
                 $order->setDelivery($deliveryContent);   
             endif;
             
-            
+
  
             foreach ($basketFull as $item) :
                 $orderDetails = new OrderDetails();

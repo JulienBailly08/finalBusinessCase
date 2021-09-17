@@ -25,17 +25,17 @@ class Status
     private $information;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="status")
+     * @ORM\OneToMany(targetEntity=Order::class, mappedBy="status")
      */
-    private $orderDetails;
+    private $orders;
 
     public function __construct()
     {
-        $this->orderDetails = new ArrayCollection();
+        $this->orders = new ArrayCollection();
+
     }
 
-
-    public function getId(): ?int
+     public function getId(): ?int
     {
         return $this->id;
     }
@@ -53,33 +53,35 @@ class Status
     }
 
     /**
-     * @return Collection|OrderDetails[]
+     * @return Collection|Order[]
      */
-    public function getOrderDetails(): Collection
+    public function getOrders(): Collection
     {
-        return $this->orderDetails;
+        return $this->orders;
     }
 
-    public function addOrderDetail(OrderDetails $orderDetail): self
+    public function addOrder(Order $order): self
     {
-        if (!$this->orderDetails->contains($orderDetail)) {
-            $this->orderDetails[] = $orderDetail;
-            $orderDetail->setStatus($this);
+        if (!$this->orders->contains($order)) {
+            $this->orders[] = $order;
+            $order->setStatus($this);
         }
 
         return $this;
     }
 
-    public function removeOrderDetail(OrderDetails $orderDetail): self
+    public function removeOrder(Order $order): self
     {
-        if ($this->orderDetails->removeElement($orderDetail)) {
+        if ($this->orders->removeElement($order)) {
             // set the owning side to null (unless already changed)
-            if ($orderDetail->getStatus() === $this) {
-                $orderDetail->setStatus(null);
+            if ($order->getStatus() === $this) {
+                $order->setStatus(null);
             }
         }
 
         return $this;
     }
+
+    
 
 }
