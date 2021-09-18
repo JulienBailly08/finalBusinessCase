@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Adress;
 use App\Form\AdressType;
 use App\Form\UserTypeFront;
+use App\Repository\OrderRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -21,6 +22,17 @@ class UserFrontController extends AbstractController
         return $this->render('user_front/index.html.twig', [
             'user' => $user,
             'adresses' => $adresses
+        ]);
+    }
+    #[Route('/user/orders', name: 'user_orders')]
+    public function showOrders(OrderRepository $orderRepository): Response
+    {
+        $user = $this->getUser();
+        //$orders = $orderRepository->findOrdersPaid($user);
+        $orders = $this->getUser()->getOrders();
+        return $this->render('user_front/orders.html.twig', [
+            'user' => $user,
+            'orders'=> $orders
         ]);
     }
 

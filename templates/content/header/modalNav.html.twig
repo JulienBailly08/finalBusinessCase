@@ -14,7 +14,9 @@
 										<p>Bienvenue
 										{{ app.user.firstname | title}}
 										{{ app.user.lastname | upper}}</p>
-										<a class="btn btn-primary text-white" href="{{path('user')}}">Gestion des informations personnelles</a>
+										<a class="btn btn-primary text-white my-3" href="{{path('user')}}">Gestion des informations personnelles</a>
+										<a class="btn btn-primary text-white my-1" href="{{path('user_orders')}}">Voir mes commandes</a>
+
 
 									{% else %}
 

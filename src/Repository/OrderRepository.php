@@ -36,6 +36,18 @@ class OrderRepository extends ServiceEntityRepository
     }
     */
 
+    public function findOrdersPaid($value): ?Order
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.user = :val')
+            ->andWhere('o.isPaid = 1')
+            ->setParameter('val', $value)
+            ->orderBy('o.createdAt', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     
     public function findOneBySomeField($value1, $value2): ?Order
     {
@@ -52,11 +64,9 @@ class OrderRepository extends ServiceEntityRepository
     public function findOneBySomeFieldSimple($value1): ?Order
     {
         return $this->createQueryBuilder('o')
-            ->andWhere('o.user = :val1')
- 
+            ->andWhere('o.user = :val1') 
             ->andWhere('o.isPaid = 0')
             ->setParameter('val1', $value1)
-  
             ->getQuery()
             ->getOneOrNullResult()
         ;
