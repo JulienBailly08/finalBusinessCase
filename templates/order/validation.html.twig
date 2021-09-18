@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+	Paiement externe
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="row">
+			<h2 class="text-center m-4">Paiement réalisé via une application externe (non implementé)</h2><hr>
+			<h3 class="ms-2 ps-3">Simulation d'arrivée sur une page indiquant la réussite de la transaction</h3>
+
+			<p class="h4 my-3">Objectifs :</p>
+			<p>Modification du champs de la bdd isPaid relatif à la commande en true.</p>
+			<p>Supression du panier situé dans la $_SESSION.</p>
+			<p>Proposer une redirection vers l'affichage des commandes au sein de l'espace client.</p>
+			<hr>
+
+			<div class="col-9">
+				<h3 class="text-secondary">Commande réalisée avec succès, nous prenons le relais, merci de votre confiance</h3>
+			</div>
+			<div class="col-3 d-flex flex-column">
+				<a href="" class="btn btn-primary align-self-end">Consulter mes commandes</a>
+			</div>
+		</div>
+
+
+	</div>
+
+
+{% endblock %}

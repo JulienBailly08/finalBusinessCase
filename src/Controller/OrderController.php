@@ -171,8 +171,24 @@ class OrderController extends AbstractController
      return $this->redirectToRoute('basket');   
     }
     #[Route('/commande/paiement', name: 'order_validation')]
-    public function paiementValidation(SessionInterface $session){
-
+    public function paiementValidation(SessionInterface $session, OrderRepository $orderRepository){
+        
+        $order = $orderRepository->find($_POST['idOrder']);
+        
+        $order->setIsPaid(1);
+               
+        //$this->entityManager->flush();
+        
+        //$session->remove('basket');
+        
+        
+        
+        
+            return $this->render('order/validation.html.twig', [          
+                
+                
+                     
+            ]);
     }
 
 }
