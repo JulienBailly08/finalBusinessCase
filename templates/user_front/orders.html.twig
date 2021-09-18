@@ -7,12 +7,47 @@
 {% block body %}
 
 
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        {% for order in orders %}
-            {% dump(order) %}
-        {% endfor %}  
-    </div>
-</div>
+	<div class="container">
+		<div class="row">
+
+			{% for order in orders %}
+				<div class="col-6">
+					<div class=" d-flex flex-column card m-1">
+						<p class="h5 text-center mt-2">Commande du
+							{{order.createdAt| date('d/m/Y à H:i')}}<a href="" class="btn  btn-primary">Détails</a></p>
+						<hr>
+						<div class="row">
+							<div class="col-6 text-center">Moyen de Paiement :
+								<br>
+								{{order.paymentChoice}}
+                                <hr>
+                                Montant total :
+                                <br>
+                                {% set total %}
+                                {% for orderDetail in order.orderDetails %}
+                                    {% dump(orderDetail) %}
+                                    {% total = total + (orderDetail.total) %}
+                                {% endfor %}
+                                {{ total }}
+                                <hr>
+                                Statut de la commande :
+                                <br>
+                                {{order.status.information}}
+
+
+							</div>
+							<div class="col-6 text-center">Choix d'expedition :
+								<br>{{order.shipment}}
+                                <hr>
+                                Adresse de livraison :
+                                <br>
+                                {{order.delivery|raw}}
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 
 {% endblock %}

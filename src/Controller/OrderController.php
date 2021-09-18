@@ -149,12 +149,11 @@ class OrderController extends AbstractController
                 $this->entityManager->persist($orderDetails);  
             endforeach;
 
-            //$this->entityManager->flush();
-            //dd($order);
+            $this->entityManager->flush();
 
-            //$orderInDB = $orderRepository->findOneBySomeField($this->getUser(), $date);
-            //dd($orderInDB);
-            $orderInDB = $orderRepository->findOneBySomeFieldSimple($this->getUser());
+
+            $orderInDB = $orderRepository->findOneBySomeField($this->getUser(), $date);
+            //$orderInDB = $orderRepository->findOneBySomeFieldSimple($this->getUser());
 
 
             return $this->render('order/add.html.twig', [          
@@ -177,17 +176,12 @@ class OrderController extends AbstractController
         
         $order->setIsPaid(1);
                
-        //$this->entityManager->flush();
+        $this->entityManager->flush();
         
-        //$session->remove('basket');
-        
-        
-        
-        
+        $session->remove('basket');      
+                
             return $this->render('order/validation.html.twig', [          
-                
-                
-                     
+                    
             ]);
     }
 
