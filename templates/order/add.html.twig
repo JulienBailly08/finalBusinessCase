@@ -14,10 +14,10 @@
 				
 			
                     <strong>Adresse de Livraison :</strong>
-						<p class="m-4">{{adress|raw}}</p>
+						<p class="m-4">{{adress|raw}}</p><br>
                 
 				
-                    <strong>Service choisi</strong>
+                    <strong>Service choisi :</strong>
 						<p class="m-4">{{shipping.name}} :<br> {{shipping.description}}</p>
 	
 		
@@ -61,8 +61,10 @@
 						€ TTC</div>
 				</div>
 
-
-				<a href="" class="mt-4 align-self-end btn btn-primary">Payer {{(totalTTC + shipping.price)|number_format(2)}} € TTC</a>
+			<form class ="d-flex flex-column" action="path('order_validation')" method="post">
+				<input type="text" name="idOrder" hidden value="{{orderInDB.id}}">
+				<a type="submit"class="mt-4 align-self-end btn btn-primary">Payer {{(totalTTC + shipping.price)|number_format(2)}} € TTC</a>
+			</form>	
 			</div>
 		</div>
 	</div>

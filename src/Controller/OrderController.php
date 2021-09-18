@@ -7,6 +7,7 @@ use App\Entity\Order;
 use App\Entity\Status;
 use App\Form\OrderType;
 use App\Entity\OrderDetails;
+use App\Repository\OrderRepository;
 use App\Repository\StatusRepository;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -69,7 +70,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/commande/recap', name: 'order_recap')]
-    public function add(SessionInterface $session, ProductRepository $productRepository, Request $request, StatusRepository $statusRepo): Response
+    public function add(SessionInterface $session, ProductRepository $productRepository, Request $request, StatusRepository $statusRepo, OrderRepository $orderRepository): Response
     {
         $basket = $session->get('basket', []);
        
@@ -107,7 +108,7 @@ class OrderController extends AbstractController
             $user = $this->getUser();
             $deliveryContent = $user->getFirstName().' '.$user->getLastname().'<br>'
             .$deliveryAdress->getNumber().' '.$deliveryAdress->getType().' '.$deliveryAdress->getName().'<br>'
-            .$deliveryAdress->getPostalCode().' '.$deliveryAdress->getCity().'<br'
+            .$deliveryAdress->getPostalCode().' '.$deliveryAdress->getCity().'<br>'
             .$deliveryAdress->getCountry();
           
             $status = $statusRepo->findOneBy(['id'=>'6']);
@@ -148,7 +149,13 @@ class OrderController extends AbstractController
                 $this->entityManager->persist($orderDetails);  
             endforeach;
 
-            //$this->entityManager->flush(); 
+            //$this->entityManager->flush();
+            //dd($order);
+
+            //$orderInDB = $orderRepository->findOneBySomeField($this->getUser(), $date);
+            //dd($orderInDB);
+            $orderInDB = $orderRepository->findOneBySomeFieldSimple($this->getUser());
+
 
             return $this->render('order/add.html.twig', [          
                 'items' => $basketFull,
@@ -156,11 +163,16 @@ class OrderController extends AbstractController
                 'totalTTC' => $totalTTC,
                 'adress'=> $adressFront,
                 'shipping'=> $shipment,
+                'orderInDB'=> $orderInDB,
                      
             ]);
  
         endif;
      return $this->redirectToRoute('basket');   
+    }
+    #[Route('/commande/paiement', name: 'order_validation')]
+    public function paiementValidation(SessionInterface $session){
+
     }
 
 }
