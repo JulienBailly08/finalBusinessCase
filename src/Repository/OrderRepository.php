@@ -36,13 +36,13 @@ class OrderRepository extends ServiceEntityRepository
     }
     */
 
-    public function findOrdersPaid($value): ?Order // a retravailler => return un array et non une collection d'objet !
+    public function findByOrdersPaid($value) // a retravailler => return un array et non une collection d'objet !
     {
         return $this->createQueryBuilder('o')
             ->andWhere('o.user = :val')
             ->andWhere('o.isPaid = 1')
             ->setParameter('val', $value)
-            ->orderBy('o.createdAt', 'ASC')
+            ->orderBy('o.createdAt', 'DESC')
             ->getQuery()
             ->getResult()
         ;

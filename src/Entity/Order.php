@@ -203,4 +203,11 @@ class Order
 
         return $this;
     }
+    public function getTotalOrder(){
+        $total=0;
+        foreach ($this->getOrderDetails()->getValues() as $product) {
+            $total = $total + ($product->getPrice()*$product->getQuantity()*$product->getTva());
+        }
+        return $total;
+    }
 }

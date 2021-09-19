@@ -9,12 +9,18 @@
 
 	<div class="container">
 		<div class="row">
-
+			{% if orders|length == 0 %}
+				<p class="text-center">Votre compte ne possède pas encore de commande réalisée auprès de La Nîmes'Alerie.</p>
+			{% else %}				
 			{% for order in orders %}
+
 				<div class="col-6">
-					<div class=" d-flex flex-column card m-1">
-						<p class="h5 text-center mt-2">Commande du
-							{{order.createdAt| date('d/m/Y à H:i')}}<a href="" class="btn  btn-primary">Détails</a></p>
+					<div class="card m-1">
+					<div class="d-flex justify-content-around align-items-center">
+						<p class="h5 text-center mt-3">Commande du
+							{{order.createdAt| date('d/m/Y à H:i')}}</p>
+							<a href="" class="btn btn-primary mt-3">Détails</a>
+					</div>		
 						<hr>
 						<div class="row">
 							<div class="col-6 text-center">Moyen de Paiement :
@@ -23,12 +29,9 @@
                                 <hr>
                                 Montant total :
                                 <br>
-                                {% set total %}
-                                {% for orderDetail in order.orderDetails %}
-                                    {% dump(orderDetail) %}
-                                    {% total = total + (orderDetail.total) %}
-                                {% endfor %}
-                                {{ total }}
+								{{order.shipmentPrice + order.getTotalOrder}} €
+                                
+                               
                                 <hr>
                                 Statut de la commande :
                                 <br>
@@ -47,6 +50,7 @@
 					</div>
 				</div>
 			{% endfor %}
+			{% endif %}
 		</div>
 	</div>
 
