@@ -19,7 +19,7 @@
 					<div class="d-flex justify-content-around align-items-center">
 						<p class="h5 text-center mt-3">Commande du
 							{{order.createdAt| date('d/m/Y à H:i')}}</p>
-							<a href="" class="btn btn-primary mt-3">Détails</a>
+							<a href="{{path('user_order_details',{'id':order.id})}}" class="btn btn-primary mt-3">Détails</a>
 					</div>		
 						<hr>
 						<div class="row">
@@ -29,7 +29,7 @@
                                 <hr>
                                 Montant total :
                                 <br>
-								{{order.shipmentPrice + order.getTotalOrder}} €
+								{{(order.shipmentPrice + order.getTotalOrder)|number_format(2)}} €
                                 
                                
                                 <hr>

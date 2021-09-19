@@ -1,0 +1,102 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	- Détail Commande
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="container">
+		<div class="row">
+			<div class="m-1">
+				<a class="btn btn-primary" href="{{path('user_orders')}}">Retour à la liste des commande</a>
+			</div>
+
+			<div class="col">
+				<div class="card m-1">
+
+						<div>
+                            <p class="h5 text-center mt-3">Commande du
+							    {{order.createdAt| date('d/m/Y à H:i')}}</p>
+
+                        </div>						
+						<div class="row">
+                            <div>
+							<table class="table table-striped">
+								<thead>
+									<tr>                                   
+										<th scope="col" class="col-6">Produits</th>
+										<th scope="col" class="col-2 text-end">Prix Unitaire € HT</th>
+										<th scope="col" class="text-end col-1">TVA</th>
+										<th scope="col" class="col-1 text-end">Quantité</th>
+										<th scope="col" class="col-2 text-end">total € TTC</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% for item in order.orderDetails %}
+										<tr>
+											<th scope="row">{{item.product}}</th>
+											<td class="text-end">{{item.price|number_format(2)}}</td>
+											<td class="text-end">{{(item.tva -1)*100 }} %</td>
+											<td class="text-end">{{ item.quantity }}</td>
+                                            <td class="text-end"> {{item.total|number_format(2)}} </td>
+										</tr>
+									{% endfor %}
+                                    <tr>
+											<th scope="row"></th>
+											<td class="text-end"></td>
+											<td class="text-end"></td>
+											<td class="text-end"></td>
+                                            <td class="text-end"></td>
+										</tr>                             
+                                        <tr>
+											<th scope="row" class="text-end">Méthode d'acheminement : {{order.shipment}}</th>
+											<td class="text-end"></td>
+											<td class="text-end"></td>
+											<td class="text-end"></td>
+                                            <td class="text-end">{{order.shipmentPrice|number_format(2)}}</td>
+										</tr>
+                                        <tr>
+											<th scope="row" class="text-end">Montant global</th>
+											<td class="text-end"></td>
+											<td class="text-end"></td>
+											<td class="text-end"></td>
+                                            <td class="text-end">{{(order.shipmentPrice + order.getTotalOrder)|number_format(2)}}</td>
+										</tr>
+
+								</tbody>
+							</table>
+                            </div>
+						</div>
+
+
+					<hr>
+					<div class="row">
+						<div class="col-6 text-center">Moyen de Paiement :
+							<br>
+							{{order.paymentChoice}}
+							
+							<hr>
+							Statut de la commande :
+							<br>
+							{{order.status.information}}
+
+
+						</div>
+						<div class="col-6 text-center">Choix d'expedition :
+							<br>{{order.shipment}}
+							<hr>
+							Adresse de livraison :
+							<br>
+							{{order.delivery|raw}}
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+
+{% endblock %}

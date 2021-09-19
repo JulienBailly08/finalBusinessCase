@@ -28,10 +28,19 @@ class UserFrontController extends AbstractController
     public function showOrders(OrderRepository $orderRepository): Response
     {
        
-        //$orders = $this->getUser()->getOrders();
         $orders = $orderRepository->findByOrdersPaid($this->getUser());
         return $this->render('user_front/orders.html.twig', [
             'orders'=> $orders
+        ]);
+    }
+
+    #[Route('/user/order/{id}', name: 'user_order_details')]
+    public function showOrderDetail($id, OrderRepository $orderRepository): Response
+    {
+       
+        $order = $orderRepository->findOneById($id);
+        return $this->render('user_front/orderShow.html.twig', [
+            'order'=> $order
         ]);
     }
 
