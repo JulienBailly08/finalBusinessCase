@@ -8,6 +8,11 @@
 
 	<section class="container pt-5 mb-5">
 		<h2 class="text-center text-warning m-4">Mes informations</h2>
+		{% for message in app.flashes('success') %}
+			<p class="alert text-primary text-center h3">
+				{{ message }}
+			</p>
+		{% endfor %}
 
 		<div class="row g-3">
 			<div class="col-sm-6">
@@ -47,8 +52,11 @@
 				{% endif %}
 			</div>
 			<div class="col-12 d-flex justify-content-center">
-				<a href={{path('user_front_edit')}} class="btn btn-secondary mt-4">Modifier ces informations</a>
+				<a href={{path('user_front_edit')}} class="btn btn-secondary m-4">Modifier ces informations</a>
+				<a href={{path('user_front_password_edit')}} class="btn btn-secondary m-4">Modifier mon mot de passe</a>
+
 			</div>
+
 
 			<hr class="mt-5">
 
@@ -83,7 +91,7 @@
 					<input disabled type="text" class="form-control" id="country" placeholder="{{adress.country}}">
 				</div>
 				<div class="col-12 d-flex justify-content-center">
-					<a href={{path('user_front-adress_edit')}} class="btn btn-secondary mt-4">Modification de l'adresse</a>
+					<a href={{path('user_front_adress_edit')}} class="btn btn-secondary mt-4">Modification de l'adresse</a>
 				</div>
 
 			{% endfor %}

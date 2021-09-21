@@ -8,10 +8,13 @@
 
 
 <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-8">
-            {{ form_start(form) }}
-            {{ form_row(form.adressName, {label: 'Nom de l\'adresse :' }) }}
+	<div class="m-1">
+		<a class="btn btn-primary" href="{{path('user')}}">Retour à la gestion du compte</a>
+	</div>
+	<div class="row justify-content-center">
+		<div class="col-8">
+			{{ form_start(form) }}
+			{{ form_row(form.adressName, {label: 'Nom de l\'adresse :' }) }}
             {{ form_row(form.number, {label: 'Numéro :' }) }}
             {{ form_row(form.type, {label: 'Type de voie :' }) }}
             {{ form_row(form.name, {label: 'Adresse  :' }) }}
