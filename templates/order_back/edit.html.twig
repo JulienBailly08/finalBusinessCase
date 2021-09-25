@@ -5,15 +5,83 @@
 {% endblock %}
 
 {% block body %}
-
+	{% dump(order)%}{% dump(order.orderDetails)%}
 	<div class="container">
-		<h1 class="text-white">Mise à jour de la commande</h1>
-		<div class="col-6">
-			{{ include('order_back/_form.html.twig', {'button_label': 'Mise à jour'}) }}
+		<div class="row">
+			<h1 class="text-white m-4">Détail de la commande</h1>
+			<div class="col-4 text-white">
+				<strong>Client :</strong>
+						<p class="m-4">{{order.user.gender ? 'Mme':'M'}} {{order.user.firstname}} {{order.user.lastname}}<br>{{order.user.email}}</p>					
+			</div>
+			<div class="col-4 text-white">
+				<strong>Adresse de Livraison :</strong>
+						<p class="m-4">{{order.delivery|raw}}</p><br>
+                
+				
+                    <strong>Service choisi :</strong>
+						<p class="m-4">{{order.shipment}}
+
+			</div>
+
+			<div class="col-4 text-end">
+				{{ include('order_back/_form.html.twig', {'button_label': 'Mise à jour'}) }}
+
+			</div>
 		</div>
+
+		<table class="table">
+			<thead class="text-primary">
+				<tr>
+					<th scope="col" class="col-6">Produits</th>
+					<th scope="col" class="col-2 text-end">Prix Unitaire € HT</th>
+					<th scope="col" class="text-end col-1">TVA</th>
+					<th scope="col" class="col-1 text-end">Quantité</th>
+					<th scope="col" class="col-2 text-end">total € TTC</th>
+				</tr>
+			</thead>
+			<tbody class="text-white">
+				{% for item in order.orderDetails %}
+					<tr>
+						<th scope="row">{{item.product}}</th>
+						<td class="text-end">{{item.price|number_format(2)}}</td>
+						<td class="text-end">{{(item.tva -1)*100 }}
+							%</td>
+						<td class="text-end">{{ item.quantity }}</td>
+						<td class="text-end">
+							{{item.total|number_format(2)}}
+						</td>
+					</tr>
+				{% endfor %}
+				<tr>
+					<th scope="row"></th>
+					<td class="text-end"></td>
+					<td class="text-end"></td>
+					<td class="text-end"></td>
+					<td class="text-end"></td>
+				</tr>
+				<tr>
+					<th scope="row" class="text-end">Méthode d'acheminement :
+						{{order.shipment}}</th>
+					<td class="text-end"></td>
+					<td class="text-end"></td>
+					<td class="text-end"></td>
+					<td class="text-end">{{order.shipmentPrice|number_format(2)}}</td>
+				</tr>
+				<tr>
+					<th scope="row" class="text-end">Montant global</th>
+					<td class="text-end"></td>
+					<td class="text-end"></td>
+					<td class="text-end"></td>
+					<td class="text-end">{{(order.shipmentPrice + order.getTotalOrder)|number_format(2)}}</td>
+				</tr>
+
+			</tbody>
+		</table>
+
+
 		<a href="{{ path('order_back_index') }}">
 			<button class="btn btn-warning">Retour</button>
 		</a>
-		{{ include('order_back/_delete_form.html.twig') }}
+
 	</div>
 {% endblock %}
