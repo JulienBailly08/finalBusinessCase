@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Order{% endblock %}
+
+{% block body %}
+    <h1>Order</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ order.id }}</td>
+            </tr>
+            <tr>
+                <th>CreatedAt</th>
+                <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Shipment</th>
+                <td>{{ order.shipment }}</td>
+            </tr>
+            <tr>
+                <th>ShipmentPrice</th>
+                <td>{{ order.shipmentPrice }}</td>
+            </tr>
+            <tr>
+                <th>Delivery</th>
+                <td>{{ order.delivery }}</td>
+            </tr>
+            <tr>
+                <th>PaymentChoice</th>
+                <td>{{ order.paymentChoice }}</td>
+            </tr>
+            <tr>
+                <th>IsPaid</th>
+                <td>{{ order.isPaid ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('order_back_index') }}">back to list</a>
+
+    <a href="{{ path('order_back_edit', {'id': order.id}) }}">edit</a>
+
+    {{ include('order_back/_delete_form.html.twig') }}
+{% endblock %}

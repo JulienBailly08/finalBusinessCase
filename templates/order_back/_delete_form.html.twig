@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('order_back_delete', {'id': order.id}) }}" onsubmit="return confirm('Etes vous certain de vouloir supprimer cette commande ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ order.id) }}">
+    <button class="btn btn-danger mt-3">Supprimer</button>
+</form>

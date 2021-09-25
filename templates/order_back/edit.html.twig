@@ -1,0 +1,19 @@
+{% extends 'baseBack.html.twig' %}
+
+{% block title %}
+	- Commande
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+		<h1 class="text-white">Mise à jour de la commande</h1>
+		<div class="col-6">
+			{{ include('order_back/_form.html.twig', {'button_label': 'Mise à jour'}) }}
+		</div>
+		<a href="{{ path('order_back_index') }}">
+			<button class="btn btn-warning">Retour</button>
+		</a>
+		{{ include('order_back/_delete_form.html.twig') }}
+	</div>
+{% endblock %}
