@@ -21,7 +21,7 @@
 						<th>Méthode d'expédition</th>
 						<th>Adresse</th>
 						<th>Mode de paiement</th>
-						<th>actions</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody class="text-white">
@@ -29,19 +29,18 @@
 						{% if  order.ispaid %}
 							<tr>
 								<td>{{ order.createdAt ? order.createdAt|date('d-m-Y H:i:s') : '' }}</td>
-                                <td>{{order.status.information}}</td>
+                                <td>{{ order.status.information }}</td>
 								<td>{{ order.shipment }}</td>
 								<td>{{ order.delivery|raw }}</td>
 								<td>{{ order.paymentChoice }}</td>
 								<td>
-									<a href="{{ path('order_back_show', {'id': order.id}) }}">Détails</a>
-									<a href="{{ path('order_back_edit', {'id': order.id}) }}">Modifications</a>
+									<a href="{{ path('order_back_edit', {'id': order.id}) }}">Détails et Modifications</a>
 								</td>
 							</tr>
 						{% endif %}
 					{% else %}
 						<tr>
-							<td colspan="8">no records found</td>
+							<td colspan="8">Aucune commande trouvée</td>
 						</tr>
 					{% endfor %}
 				</tbody>
