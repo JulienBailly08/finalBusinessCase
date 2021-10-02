@@ -4,10 +4,17 @@ namespace App\Entity;
 
 use App\Repository\OrderDetailsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
  * @ORM\Entity(repositoryClass=OrderDetailsRepository::class)
  */
+#[ApiResource(
+    itemOperations:['get']  
+)]
+
+
+
 class OrderDetails
 {
     /**

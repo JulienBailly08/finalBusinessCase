@@ -7,14 +7,17 @@ use App\Repository\OrderRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
  * @ORM\Table(name="`order`")
+ * 
  */
 
 #[ApiResource(
-    itemOperations:['get']
+    itemOperations:['get'],
+    normalizationContext: ['groups' => ['read']]
 )]
 
 class Order
@@ -23,48 +26,57 @@ class Order
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="orders")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"read"})
      */
     private $user;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read"})
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"read"})
      */
     private $shipment;
 
    
     /**
      * @ORM\Column(type="float")
+     * @Groups({"read"})
      */
     private $shipmentPrice;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"read"})
      */
     private $delivery;
 
     /**
      * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="myOrder")
+     * @Groups({"read"})
      */
     private $orderDetails;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups({"read"})
      */
     private $paymentChoice;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups({"read"})
      */
     private $isPaid;
 
