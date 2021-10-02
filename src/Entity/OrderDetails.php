@@ -9,6 +9,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 /**
  * @ORM\Entity(repositoryClass=OrderDetailsRepository::class)
  */
+
 #[ApiResource(
     itemOperations:['get']  
 )]
