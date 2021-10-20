@@ -11,8 +11,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=OrderRepository::class)
- * @ORM\Table(name="`order`")
- * 
+ * @ORM\Table(name="`order`") 
  */
 
 #[ApiResource(
