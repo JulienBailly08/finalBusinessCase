@@ -6,6 +6,7 @@ use App\Entity\Adress;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
+use DateTime;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,7 +33,8 @@ class RegistrationController extends AbstractController
         
         $user = new User();
         $adresse = new Adress();
-        
+        $date = new DateTime();
+                
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
@@ -44,7 +46,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
+            $user->setCreatedAt($date);
             //ajouter des champs de validation pour le $adresse
 
             $adresse->setNumber($form->get('adress')->get('number')->getData());

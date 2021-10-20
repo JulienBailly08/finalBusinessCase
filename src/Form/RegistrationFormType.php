@@ -53,6 +53,9 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('newsletter',CheckboxType::class,[
+                'required' => false
+            ]) // a retravailler
             ->add('username')
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
