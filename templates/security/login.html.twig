@@ -28,12 +28,12 @@
 					<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
 					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-					<div class="d-flex justify-content-between">
-						<button class=" my-4 btn btn-lg btn-primary" type="submit">
+					<div class="d-md-flex justify-content-around">
+						<button class=" my-4 btn btn btn-primary" type="submit">
 							Soumettre
 						</button>
 
-						<a href={{path('app_register')}} class=" my-4 btn btn-lg btn-primary">
+						<a href={{path('app_register')}} class=" my-1 mx-md-2 my-md-4 btn btn btn-primary">
 							Pas encore de compte chez nous ?
 						</a>
 					</div>

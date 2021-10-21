@@ -8,14 +8,14 @@
 	<div class="container">
 
 		{% if items | length >0 %}
-			<table class="table">
+			<table class="table table-sm">
 				<thead>
 					<tr>
 						<th>Produit</th>
-						<th>Prix € HT</th>
+						<th class="none">Prix € HT</th>
 						<th>Prix € TTC</th>
 						<th>Quantité</th>
-						<th>Total € HT</th>
+						<th class="none">Total € HT</th>
 						<th>Total € TTC</th>
 						<th></th>
 						<th></th>
@@ -27,22 +27,22 @@
 							<td>
 								<a href="{{ path('product_front',{'id':item.product.id})}}">{{item.product.title}}</a>
 							</td>
-							<td>{{item.product.price |number_format(2)}}
+							<td class="none">{{item.product.price |number_format(2)}}
 								</td>
 							<td>{{ (item.product.price*item.product.tvaRate.rate) |number_format(2) }}
 								</td>
 							<td>{{item.quantity}}</td>
-							<td>{{(item.product.price*item.quantity) |number_format(2)}}
+							<td class="none">{{(item.product.price*item.quantity) |number_format(2)}}
 								</td>
 							<td>{{(item.product.price*item.product.tvaRate.rate*item.quantity) |number_format(2) }}
 								</td>
 							<td>
 								<form action="{{path('basket_update', {'id':item.product.id})}}" method="post">
-									<div class="row justify-content-around align-items-center">
-										<div class="col-2">
+									<div class="d-md-flex justify-content-around align-items-center">
+										<div>
 											<input class="w-100" name="quantityUpdate" type="number" value="{{item.quantity}}" min="1">
 										</div>
-										<div class="col-3 d-flex align-items-center justify-content-end">
+										<div>
 											<input type="submit" class="btn btn-secondary" value="Modifier quantité">
 										</div>
 									</div>
@@ -60,7 +60,7 @@
 				<tfoot>
 					<tr>
 						<td colspan="4" class="text-end">Total :</td>
-						<td>{{totalHT|number_format(2)}}
+						<td class="none">{{totalHT|number_format(2)}}
 							</td>
 						<td>{{totalTTC|number_format(2)}}
 							</td>

@@ -77,6 +77,9 @@ footer a{
   body{
     font-size: 0.75rem;
   }
+  table{
+    font-size: 0.75rem;
+  }
   header a{
     font-size: 0.75rem;
   }
@@ -92,6 +95,9 @@ footer a{
   .tour:hover{
     transform: none;
   }
+  .none{
+    display: none;
+  }
 }
 /*break point sm*/
 @media screen and (max-width: 576px) {
@@ -100,6 +106,9 @@ footer a{
   }
   header a{
     font-size: 0.65rem;
+  }
+  table{
+    font-size:0.65rem;
   }
   
 }
