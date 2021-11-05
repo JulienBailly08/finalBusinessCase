@@ -140,6 +140,7 @@ class OrderController extends AbstractController
  
             foreach ($basketFull as $item) :
                 $orderDetails = new OrderDetails();
+                $orderDetails->setCreatedAt($date);
                 $orderDetails->setMyOrder($order);
                 $orderDetails->setProduct($item['product']->getTitle());
                 $orderDetails->setQuantity($item['quantity']);
