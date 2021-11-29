@@ -18,9 +18,7 @@
 						<div class="p-1 bg-white rounded d-flex flex-row flex-md-column row row-cols-3 row-cols-md-1">
 
 							{{ render(controller('App\\Controller\\SearchController::searchBar')) }}
-							<a href="" class=" col text-center d-block  pt-1 pt-md-3  mb-2 mb-md-4 mt-2 mt-md-0">Trier par prix</a>
-							<a href="" class=" col text-center d-block  pt-1  mb-2 mb-md-4 mt-2 mt-md-0">Trier par marque</a>
-							<a href="" class=" col text-center d-block  pt-1  mb-2 mb-md-4 mt-2 mt-md-0">Trier par autre</a>
+							<!-- <a href="" class=" col text-center d-block  pt-1 pt-md-3  mb-2 mb-md-4 mt-2 mt-md-0">Trier par prix</a> -->
 
 						</div>
 					</div>
@@ -29,7 +27,6 @@
 			</div>
 			<div class=" col-12 col-md-9 col-xl-10 px-4">
 				<div class="container-fluid">
-
 
 					{% if app.request.method == 'POST' %}
 
