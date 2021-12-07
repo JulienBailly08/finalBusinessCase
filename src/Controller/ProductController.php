@@ -47,7 +47,7 @@ class ProductController extends AbstractController
         }
         
         $arianeArray=array_reverse(recursCat($category));
-        dump($arianeArray);
+        //var_dump($arianeArray);
         
         return $this->render('product/indexCat.html.twig', [
             'products' => $productRepository->findBy(['category'=>$id]),

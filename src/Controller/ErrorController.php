@@ -13,9 +13,9 @@ class ErrorController extends AbstractController
     public function show(Request $request)
     {
         $comeBack = $request->headers->get('referer');
-        dump($request);
+        //dump($request);
         
-        dump($comeBack);
+        //dump($comeBack);
         
         return $this->render('error/index.html.twig', [
             
